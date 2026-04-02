@@ -2,7 +2,6 @@
 layout: page
 title: Portfolio
 permalink: /portfolio/
-pageOrder: 2
 ---
 
-TODO: Add links to portfolio
+See the full project showcase on the [home page](/).

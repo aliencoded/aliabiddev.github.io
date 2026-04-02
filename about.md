@@ -2,39 +2,26 @@
 layout: page
 title: About
 permalink: /about/
-pageOrder: 10
 ---
 
-Blog posts related to software development, technology, and other topics.
+Software engineer based in the US, building products at the intersection of community and technology.
 
-### 💼 Professional Profile
+I work across the full stack — from system design to product — and am currently focused on two side projects:
 
-<a href="https://www.linkedin.com/in/aliencoded/" target="_blank" rel="noopener noreferrer">
-  LinkedIn: Ali Abid
-</a>
+**[carpool1.com](https://carpool1.com)** — A community carpool platform connecting neighbors for smarter, shared commutes, focusing on being the easiest and most convenient and rewarding platform for carpoolers.
 
+**[MetaCurrents](https://metacurrents.com)** — An AI-powered news portal that intelligently aggregates and curates the news that matters.
 
-## 🔗 Projects & Links
+---
 
-### 📝 Blog
-<a href="https://www.thinkingslightly.com/" target="_blank" rel="noopener noreferrer">
-  Thinking Slightly
-</a>
+### Connect
 
-### 📰 News Media Publishing
-<a href="https://metacurrents.com/" target="_blank" rel="noopener noreferrer">
-  MetaCurrents
-</a>
+- [LinkedIn — Ali Abid](https://www.linkedin.com/in/aliencoded/)
+- [GitHub — aliabiddev](https://github.com/aliabiddev)
+- [GitHub — aliencoded](https://github.com/aliencoded)
 
-### 🧪 Toy Applications
+---
 
-**Community Carpool**  
-<a href="https://graceful-rugelach-82210a.netlify.app/" target="_blank" rel="noopener noreferrer">
-  View App
-</a>
+### Writing
 
-**Spark**  
-<a href="https://monumental-lamington-3e2a1f.netlify.app/" target="_blank" rel="noopener noreferrer">
-  View App
-</a>
-
+This site is also home to [Thinking Slightly](/posts) — my blog on software, technology, and ideas.
