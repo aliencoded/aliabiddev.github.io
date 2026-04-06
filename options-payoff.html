@@ -1,0 +1,1076 @@
+---
+layout: default
+title: "Derivatives Payoff"
+description: "Real-time payoff diagram and greeks for ES mini futures options. Model positions across multiple expirations with Black-76 pricing."
+---
+
+<style>
+/* ── Page wrapper ──────────────────────────────────────────────────────────── */
+.opts-page {
+  padding-top: calc(var(--nav-h) + 48px);
+  padding-bottom: 80px;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* ── Header ────────────────────────────────────────────────────────────────── */
+.opts-header {
+  margin-bottom: 28px;
+}
+.opts-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.opts-header p {
+  color: var(--ink-mid);
+  font-size: 0.9rem;
+  max-width: 640px;
+}
+
+/* ── Panel base ────────────────────────────────────────────────────────────── */
+.opts-panel {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  margin-bottom: 16px;
+}
+.opts-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.opts-panel-header h2 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+  font-family: var(--font-body);
+  letter-spacing: 0;
+}
+
+/* ── Market params ─────────────────────────────────────────────────────────── */
+.market-params {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  padding: 18px 20px;
+}
+.param-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.param-group label {
+  font-size: 0.71rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-muted);
+}
+.param-input {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  padding: 7px 10px;
+  transition: border-color var(--t), background var(--t);
+  width: 130px;
+}
+.param-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: var(--white);
+}
+.param-input.wide { width: 150px; }
+
+/* ── Presets bar ───────────────────────────────────────────────────────────── */
+.presets-bar {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0 20px 16px;
+}
+.presets-label {
+  font-size: 0.71rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-muted);
+  margin-right: 4px;
+}
+.pill-btn {
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  color: var(--ink-mid);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--t);
+  white-space: nowrap;
+}
+.pill-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-light);
+}
+.pill-btn.danger:hover {
+  border-color: #EF4444;
+  color: #EF4444;
+  background: #FEF2F2;
+}
+
+/* ── Add button ────────────────────────────────────────────────────────────── */
+.btn-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--t);
+}
+.btn-add:hover { background: var(--accent-hover); }
+
+/* ── Positions table ───────────────────────────────────────────────────────── */
+.positions-table-wrap { overflow-x: auto; }
+.positions-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+.positions-table th {
+  background: var(--bg);
+  color: var(--ink-muted);
+  font-size: 0.69rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 8px 10px;
+  text-align: left;
+  white-space: nowrap;
+}
+.positions-table td {
+  padding: 8px 10px;
+  border-top: 1px solid var(--border);
+  vertical-align: middle;
+}
+.positions-table tbody tr:hover { background: var(--bg); }
+
+/* ── Toggle ────────────────────────────────────────────────────────────────── */
+.tog {
+  display: inline-flex;
+  border: 1px solid var(--border-strong);
+  border-radius: 7px;
+  overflow: hidden;
+}
+.tog-btn {
+  border: none;
+  background: transparent;
+  padding: 4px 9px;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--t), color var(--t);
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+.tog-btn.on       { background: var(--accent);  color: #fff; font-weight: 600; }
+.tog-btn.on.short { background: #DC2626; }
+.tog-btn.on.put   { background: #7C3AED; }
+
+/* ── Cell inputs ───────────────────────────────────────────────────────────── */
+.cinput {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  padding: 4px 8px;
+  transition: border-color var(--t);
+}
+.cinput:focus { outline: none; border-color: var(--accent); background: #fff; }
+.w-strike { width: 78px; }
+.w-iv     { width: 58px; }
+.w-qty    { width: 46px; }
+.w-prem   { width: 70px; }
+.w-expiry { width: 128px; }
+
+/* ── Quick expiry buttons ──────────────────────────────────────────────────── */
+.quick-btns {
+  display: flex;
+  gap: 3px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.q-btn {
+  border: 1px solid var(--border-strong);
+  background: #fff;
+  color: var(--ink-muted);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--t);
+  white-space: nowrap;
+}
+.q-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+
+/* ── Remove button ─────────────────────────────────────────────────────────── */
+.btn-rm {
+  background: none;
+  border: none;
+  color: var(--ink-muted);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: all var(--t);
+  line-height: 1;
+}
+.btn-rm:hover { color: #EF4444; background: #FEF2F2; }
+
+/* ── Value badge ───────────────────────────────────────────────────────────── */
+.pos-val {
+  font-size: 0.8rem;
+  color: var(--ink-mid);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ── Empty state ───────────────────────────────────────────────────────────── */
+.empty-state {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--ink-muted);
+  font-size: 0.9rem;
+}
+
+/* ── Greeks bar ────────────────────────────────────────────────────────────── */
+.greeks-bar {
+  display: flex;
+  gap: 0;
+  flex-wrap: wrap;
+  padding: 0;
+}
+.greek-cell {
+  flex: 1;
+  min-width: 110px;
+  padding: 14px 18px;
+  border-right: 1px solid var(--border);
+}
+.greek-cell:last-child { border-right: none; }
+.greek-lbl {
+  font-size: 0.69rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-muted);
+  margin-bottom: 4px;
+}
+.greek-val {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.greek-val.pos { color: #16A34A; }
+.greek-val.neg { color: #DC2626; }
+.greek-sub {
+  font-size: 0.72rem;
+  color: var(--ink-muted);
+  margin-top: 2px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Chart panel ───────────────────────────────────────────────────────────── */
+.chart-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.range-lbl {
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+  font-weight: 500;
+}
+.range-seg {
+  display: inline-flex;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg);
+}
+.seg-btn {
+  border: none;
+  background: transparent;
+  padding: 6px 13px;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--ink-mid);
+  cursor: pointer;
+  transition: background var(--t), color var(--t);
+  border-right: 1px solid var(--border-strong);
+  white-space: nowrap;
+}
+.seg-btn:last-child { border-right: none; }
+.seg-btn:hover:not(.seg-active) { background: var(--accent-light); color: var(--accent); }
+.seg-btn.seg-active {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+.chart-wrap {
+  padding: 16px 20px 12px;
+}
+.chart-canvas-wrap {
+  position: relative;
+  height: 420px;
+}
+.chart-footnote {
+  margin-top: 8px;
+  font-size: 0.73rem;
+  color: var(--ink-muted);
+  text-align: center;
+}
+
+/* ── Empty chart placeholder ───────────────────────────────────────────────── */
+.chart-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 420px;
+  color: var(--ink-muted);
+  font-size: 0.9rem;
+  border: 2px dashed var(--border-strong);
+  border-radius: var(--r);
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .opts-page { padding-left: 16px; padding-right: 16px; }
+  .greek-cell { min-width: 90px; padding: 12px 12px; }
+  .greek-val { font-size: 1rem; }
+  .chart-canvas-wrap { height: 300px; }
+  .chart-empty { height: 300px; }
+}
+</style>
+
+<div class="opts-page">
+
+  <!-- Header -->
+  <div class="opts-header">
+    <h1>Derivatives Payoff Analyzer</h1>
+    <p>Model ES mini futures options (/ES) across multiple strikes, expirations, and time horizons. Add up to 10+ positions and see real-time payoff curves with theta and vega. Prices use Black-76; 1 point = $50/contract.</p>
+  </div>
+
+  <!-- Market Parameters -->
+  <div class="opts-panel">
+    <div class="market-params">
+      <div class="param-group">
+        <label>ES Futures Price</label>
+        <input class="param-input" type="number" id="esPrice" value="5500" step="5" min="1000" max="15000" oninput="scheduleUpdate()">
+      </div>
+      <div class="param-group">
+        <label>VIX / Base IV (%)</label>
+        <input class="param-input" type="number" id="vix" value="20" step="0.5" min="1" max="200" oninput="scheduleUpdate()">
+      </div>
+      <div class="param-group">
+        <label>Risk-Free Rate (%)</label>
+        <input class="param-input" type="number" id="rfr" value="4.5" step="0.1" min="0" max="25" oninput="scheduleUpdate()">
+      </div>
+      <div class="param-group">
+        <label>Analysis Date</label>
+        <input class="param-input wide" type="date" id="analysisDate" oninput="scheduleUpdate()">
+      </div>
+    </div>
+    <!-- Quick-start presets -->
+    <div class="presets-bar">
+      <span class="presets-label">Quick Start:</span>
+      <button class="pill-btn" onclick="loadPreset('straddle')">ATM Straddle</button>
+      <button class="pill-btn" onclick="loadPreset('strangle')">OTM Strangle</button>
+      <button class="pill-btn" onclick="loadPreset('bull_spread')">Bull Call Spread</button>
+      <button class="pill-btn" onclick="loadPreset('iron_condor')">Iron Condor</button>
+      <button class="pill-btn" onclick="loadPreset('covered_call')">Covered-like Call</button>
+      <button class="pill-btn" onclick="loadPreset('naked_put')">Cash-Secured Put</button>
+      <button class="pill-btn danger" onclick="clearAll()">Clear All</button>
+    </div>
+  </div>
+
+  <!-- Positions -->
+  <div class="opts-panel">
+    <div class="opts-panel-header">
+      <h2>Positions <span id="posCount" style="color:var(--ink-muted); font-weight:400"></span></h2>
+      <button class="btn-add" onclick="addPosition()">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="4" x2="12" y2="20"/><line x1="4" y1="12" x2="20" y2="12"/></svg>
+        Add Position
+      </button>
+    </div>
+    <div id="tableWrap" class="positions-table-wrap" style="display:none">
+      <table class="positions-table">
+        <thead>
+          <tr>
+            <th>Side</th>
+            <th>Type</th>
+            <th>Strike</th>
+            <th>Expiry &amp; Quick Set</th>
+            <th>IV %</th>
+            <th>Qty</th>
+            <th>Entry Premium (pts)</th>
+            <th>Theo Value</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="posBody"></tbody>
+      </table>
+    </div>
+    <div id="emptyState" class="empty-state">
+      No positions yet — add one above or pick a quick-start preset.
+    </div>
+  </div>
+
+  <!-- Greeks -->
+  <div class="opts-panel" id="greeksPanel" style="display:none">
+    <div class="greeks-bar">
+      <div class="greek-cell">
+        <div class="greek-lbl">Δ Delta</div>
+        <div class="greek-val" id="gDelta">—</div>
+      </div>
+      <div class="greek-cell">
+        <div class="greek-lbl">Γ Gamma</div>
+        <div class="greek-val" id="gGamma">—</div>
+      </div>
+      <div class="greek-cell">
+        <div class="greek-lbl">Θ Theta ($/day)</div>
+        <div class="greek-val" id="gTheta">—</div>
+        <div class="greek-sub" id="gThetaPts">—</div>
+      </div>
+      <div class="greek-cell">
+        <div class="greek-lbl">V Vega ($/+1% IV)</div>
+        <div class="greek-val" id="gVega">—</div>
+        <div class="greek-sub" id="gVegaPts">—</div>
+      </div>
+      <div class="greek-cell">
+        <div class="greek-lbl">Net Debit / Credit</div>
+        <div class="greek-val" id="gNetPrem">—</div>
+      </div>
+      <div class="greek-cell">
+        <div class="greek-lbl">P&amp;L at Current</div>
+        <div class="greek-val" id="gCurPnl">—</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart -->
+  <div class="opts-panel">
+    <div class="opts-panel-header">
+      <h2>Payoff &amp; Time Curves</h2>
+      <div class="chart-controls">
+        <span class="range-lbl">Price range:</span>
+        <div class="range-seg" role="group" aria-label="Chart price range">
+          <button class="seg-btn" id="r05" onclick="setRange(0.005)">±0.5%</button>
+          <button class="seg-btn" id="r1"  onclick="setRange(0.01)">±1%</button>
+          <button class="seg-btn" id="r3"  onclick="setRange(0.03)">±3%</button>
+          <button class="seg-btn" id="r5"  onclick="setRange(0.05)">±5%</button>
+          <button class="seg-btn" id="r10" onclick="setRange(0.10)">±10%</button>
+        </div>
+      </div>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-canvas-wrap">
+        <canvas id="payoffChart" style="display:none"></canvas>
+        <div id="chartEmpty" class="chart-empty">Add positions to see the payoff graph</div>
+      </div>
+      <div class="chart-footnote">
+        P&amp;L in USD · ES mini = $50/point · Entry at current ES price if no premium entered · Black-76 model · VIX used as base IV (overridable per position)
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script>
+// ═══════════════════════════════════════════════════════════════════════════════
+// Math helpers
+// ═══════════════════════════════════════════════════════════════════════════════
+function normalCDF(x) {
+  const a1=0.254829592,a2=-0.284496736,a3=1.421413741,a4=-1.453152027,a5=1.061405429,p=0.3275911;
+  const sign = x < 0 ? -1 : 1;
+  const t = 1/(1+p*Math.abs(x));
+  const poly = t*(a1+t*(a2+t*(a3+t*(a4+t*a5))));
+  return 0.5*(1+sign*(1-poly*Math.exp(-x*x/2)));
+}
+function normalPDF(x) { return Math.exp(-x*x/2)/Math.sqrt(2*Math.PI); }
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// Black-76 (futures options pricing)
+// ═══════════════════════════════════════════════════════════════════════════════
+function b76Price(F, K, T, sigma, r, isCall) {
+  if (T < 1e-8 || sigma < 1e-6) return isCall ? Math.max(F-K,0) : Math.max(K-F,0);
+  const sq = Math.sqrt(T);
+  const d1 = (Math.log(F/K) + 0.5*sigma*sigma*T) / (sigma*sq);
+  const d2 = d1 - sigma*sq;
+  const df = Math.exp(-r*T);
+  return isCall
+    ? df*(F*normalCDF(d1)  - K*normalCDF(d2))
+    : df*(K*normalCDF(-d2) - F*normalCDF(-d1));
+}
+
+function b76Greeks(F, K, T, sigma, r, isCall) {
+  if (T < 1e-8 || sigma < 1e-6) {
+    return { delta: isCall?(F>K?1:0):(F<K?-1:0), gamma:0, theta:0, vega:0 };
+  }
+  const sq  = Math.sqrt(T);
+  const d1  = (Math.log(F/K) + 0.5*sigma*sigma*T) / (sigma*sq);
+  const d2  = d1 - sigma*sq;
+  const df  = Math.exp(-r*T);
+  const nd1 = normalPDF(d1);
+  const gamma = df*nd1/(F*sigma*sq);
+  const vega  = df*F*nd1*sq/100;           // per 1% change in IV, in points
+  let delta, theta;
+  if (isCall) {
+    delta = df*normalCDF(d1);
+    // dC/dt = -dC/dT; dC/dT = -r*df*(F*N(d1)-K*N(d2)) + df*F*n(d1)*sigma/(2*sqrt(T))
+    theta = (r*df*(F*normalCDF(d1)-K*normalCDF(d2)) - df*F*nd1*sigma/(2*sq)) / 365;
+  } else {
+    delta = -df*normalCDF(-d1);
+    // dP/dt = -dP/dT; dP/dT = -r*df*(K*N(-d2)-F*N(-d1)) + df*F*n(d1)*sigma/(2*sqrt(T))
+    theta = (r*df*(K*normalCDF(-d2)-F*normalCDF(-d1)) - df*F*nd1*sigma/(2*sq)) / 365;
+  }
+  return {delta, gamma, theta, vega};
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// State
+// ═══════════════════════════════════════════════════════════════════════════════
+let positions = [];
+let nextId    = 0;
+let chart     = null;
+let chartRange = 0.05;
+let updateTimer = null;
+
+// ─── Getters ─────────────────────────────────────────────────────────────────
+const $  = id => document.getElementById(id);
+const gf = id => parseFloat($(id).value) || 0;
+const esP  = () => gf('esPrice') || 5500;
+const vix  = () => gf('vix')     || 20;
+const rfr  = () => gf('rfr')     || 4.5;
+
+function analysisDate() {
+  const v = $('analysisDate').value;
+  if (v) { const d=new Date(v+'T12:00:00'); d.setHours(0,0,0,0); return d; }
+  const d=new Date(); d.setHours(0,0,0,0); return d;
+}
+
+function daysUntil(dateStr) {
+  if (!dateStr) return 0;
+  const t = analysisDate().getTime();
+  const e = new Date(dateStr+'T12:00:00'); e.setHours(0,0,0,0);
+  return Math.max(0, Math.round((e.getTime()-t)/86400000));
+}
+
+// For greeks & entry pricing: treat 0DTE as half a trading day remaining (~7h).
+// This keeps theta/vega meaningful and avoids astronomically large per-day rates.
+// 1 trading day ≈ 1/252 years; 0.5 trading day ≈ 0.5/252.
+function currentT(pos) {
+  return Math.max(0.5 / 252, daysUntil(pos.expiry) / 365);
+}
+
+function isoDate(d) { return d.toISOString().split('T')[0]; }
+
+function futureDate(daysAhead) {
+  const d = analysisDate();
+  d.setDate(d.getDate()+daysAhead);
+  return isoDate(d);
+}
+
+function junExpiry() {
+  // Third Friday of June, this year or next
+  const today = analysisDate();
+  for (let yr = today.getFullYear(); yr <= today.getFullYear()+1; yr++) {
+    let d = new Date(yr,5,1); // June 1
+    let fri = (5-d.getDay()+7)%7;
+    d.setDate(1+fri+14);      // third Friday
+    if (d >= today) return isoDate(d);
+  }
+  return isoDate(futureDate(75));
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// Position CRUD
+// ═══════════════════════════════════════════════════════════════════════════════
+function addPosition(overrides={}) {
+  const atm = Math.round(esP()/25)*25;
+  const id  = nextId++;
+  const pos = {
+    id,
+    isLong:   true,
+    isCall:   true,
+    strike:   atm,
+    expiry:   futureDate(0),
+    iv:       vix(),
+    qty:      1,
+    premium:  null,   // null = auto
+    ...overrides
+  };
+  positions.push(pos);
+  renderRow(pos);
+  scheduleUpdate();
+}
+
+function removePosition(id) {
+  positions = positions.filter(p=>p.id!==id);
+  const row = $('r-'+id);
+  if (row) row.remove();
+  scheduleUpdate();
+}
+
+function renderRow(pos) {
+  const tbody = $('posBody');
+  const tr = document.createElement('tr');
+  tr.id = 'r-'+pos.id;
+  tr.innerHTML = rowHTML(pos);
+  tbody.appendChild(tr);
+}
+
+function rowHTML(pos) {
+  const F=esP(), r=rfr()/100, T=currentT(pos), sigma=pos.iv/100;
+  const theo = b76Price(F, pos.strike, T, sigma, r, pos.isCall);
+  const entryPrem = pos.premium!==null ? pos.premium : theo;
+  const pnl = (theo-entryPrem)*50*(pos.isLong?1:-1)*pos.qty;
+  const dispPrem = pos.premium!==null ? pos.premium.toFixed(2) : '';
+  const id=pos.id;
+  return `
+  <td>
+    <div class="tog">
+      <button class="tog-btn${pos.isLong?' on':''}"         onclick="setField(${id},'isLong',true)">Long</button>
+      <button class="tog-btn${!pos.isLong?' on short':''}"  onclick="setField(${id},'isLong',false)">Short</button>
+    </div>
+  </td>
+  <td>
+    <div class="tog">
+      <button class="tog-btn${pos.isCall?' on':''}"        onclick="setField(${id},'isCall',true)">Call</button>
+      <button class="tog-btn${!pos.isCall?' on put':''}"   onclick="setField(${id},'isCall',false)">Put</button>
+    </div>
+  </td>
+  <td><input class="cinput w-strike" type="number" id="strike-${id}" value="${pos.strike}" step="25" min="100" max="20000" oninput="fromInput(${id},'strike')"></td>
+  <td>
+    <input class="cinput w-expiry" type="date" id="expiry-${id}" value="${pos.expiry}" oninput="fromInput(${id},'expiry')">
+    <div class="quick-btns">
+      <button class="q-btn" onclick="qExpiry(${id},0)">0D</button>
+      <button class="q-btn" onclick="qExpiry(${id},1)">1D</button>
+      <button class="q-btn" onclick="qExpiry(${id},7)">1W</button>
+      <button class="q-btn" onclick="qExpiry(${id},14)">2W</button>
+      <button class="q-btn" onclick="qExpiry(${id},30)">1Mo</button>
+      <button class="q-btn" onclick="qExpiry(${id},60)">2Mo</button>
+      <button class="q-btn" onclick="qExpiryJun(${id})">Jun</button>
+    </div>
+  </td>
+  <td><input class="cinput w-iv" type="number" id="iv-${id}" value="${pos.iv}" step="0.5" min="0.1" max="300" oninput="fromInput(${id},'iv')"></td>
+  <td><input class="cinput w-qty" type="number" id="qty-${id}" value="${pos.qty}" step="1" min="1" max="500" oninput="fromInput(${id},'qty')"></td>
+  <td><input class="cinput w-prem" type="number" id="prem-${id}" value="${dispPrem}" placeholder="${theo.toFixed(2)}" step="0.25" min="0" oninput="fromInput(${id},'premium')"></td>
+  <td><span class="pos-val" id="pv-${id}">$${(theo*50*pos.qty).toFixed(0)}<br><span style="font-size:0.72rem;color:${pnl>=0?'#16A34A':'#DC2626'}">${pnl>=0?'+':''}\$${pnl.toFixed(0)}</span></span></td>
+  <td><button class="btn-rm" onclick="removePosition(${id})" title="Remove">×</button></td>`;
+}
+
+function setField(id, field, val) {
+  const pos = positions.find(p=>p.id===id);
+  if (!pos) return;
+  pos[field] = val;
+  const tr = $('r-'+id);
+  if (tr) tr.innerHTML = rowHTML(pos);
+  scheduleUpdate();
+}
+
+function fromInput(id, field) {
+  const pos = positions.find(p=>p.id===id);
+  if (!pos) return;
+  const el = $(field+'-'+id);
+  if (!el) return;
+  if      (field==='premium') pos.premium = el.value!=='' ? parseFloat(el.value) : null;
+  else if (field==='expiry')  pos.expiry  = el.value;
+  else                         pos[field]  = parseFloat(el.value)||0;
+  refreshPosValue(pos);
+  scheduleUpdate();
+}
+
+function qExpiry(id, days) {
+  const pos=positions.find(p=>p.id===id); if(!pos) return;
+  pos.expiry = futureDate(days);
+  const el=$('expiry-'+id); if(el) el.value=pos.expiry;
+  refreshPosValue(pos); scheduleUpdate();
+}
+function qExpiryJun(id) {
+  const pos=positions.find(p=>p.id===id); if(!pos) return;
+  pos.expiry = junExpiry();
+  const el=$('expiry-'+id); if(el) el.value=pos.expiry;
+  refreshPosValue(pos); scheduleUpdate();
+}
+
+function refreshPosValue(pos) {
+  const F=esP(), r=rfr()/100, T=currentT(pos), sigma=pos.iv/100;
+  const theo = b76Price(F, pos.strike, T, sigma, r, pos.isCall);
+  const entryPrem = pos.premium!==null ? pos.premium : theo;
+  const pnl = (theo-entryPrem)*50*(pos.isLong?1:-1)*pos.qty;
+  const el=$('pv-'+pos.id);
+  if(el) el.innerHTML=`$${(theo*50*pos.qty).toFixed(0)}<br><span style="font-size:0.72rem;color:${pnl>=0?'#16A34A':'#DC2626'}">${pnl>=0?'+':''}\$${pnl.toFixed(0)}</span>`;
+  const premEl=$('prem-'+pos.id);
+  if(premEl && pos.premium===null) premEl.placeholder=theo.toFixed(2);
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// Portfolio calculations
+// ═══════════════════════════════════════════════════════════════════════════════
+function portPayoff(F_test, daysElapsed) {
+  const r = rfr()/100;
+  return positions.reduce((sum,pos) => {
+    // Entry: use intraday T so 0DTE entry price includes time value
+    const T_entry = currentT(pos);
+    // Future snapshot: how much time remains after daysElapsed have passed
+    const T_now   = Math.max(0, daysUntil(pos.expiry) - daysElapsed) / 365;
+    const sigma   = pos.iv/100;
+    const entry   = pos.premium!==null ? pos.premium : b76Price(esP(), pos.strike, T_entry, sigma, r, pos.isCall);
+    const val     = b76Price(F_test, pos.strike, T_now, sigma, r, pos.isCall);
+    return sum + (val-entry)*50*(pos.isLong?1:-1)*pos.qty;
+  },0);
+}
+
+function portGreeks() {
+  const F=esP(), r=rfr()/100;
+  let delta=0, gamma=0, theta=0, vega=0, netPrem=0;
+  positions.forEach(pos => {
+    const T    = currentT(pos);   // includes intraday time for 0DTE
+    const sigma= pos.iv/100;
+    const entry= pos.premium!==null ? pos.premium : b76Price(F, pos.strike, T, sigma, r, pos.isCall);
+    const g    = b76Greeks(F, pos.strike, T, sigma, r, pos.isCall);
+    const dir  = pos.isLong?1:-1;
+    delta   += g.delta * dir * pos.qty;
+    gamma   += g.gamma * dir * pos.qty;
+    theta   += g.theta * dir * pos.qty * 50;
+    vega    += g.vega  * dir * pos.qty * 50;
+    netPrem += entry   * dir * pos.qty * 50;
+  });
+  return {delta, gamma, theta, vega, netPrem};
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// Presets
+// ═══════════════════════════════════════════════════════════════════════════════
+function clearAll() {
+  positions=[]; $('posBody').innerHTML='';
+  try { localStorage.removeItem(LS_KEY); } catch(e) {}
+  scheduleUpdate();
+}
+
+function loadPreset(name) {
+  clearAll();
+  const F=esP(), atm=Math.round(F/25)*25;
+  const otmC=atm+Math.round(F*0.01/25)*25, otmP=atm-Math.round(F*0.01/25)*25;
+  const wingC=atm+Math.round(F*0.02/25)*25, wingP=atm-Math.round(F*0.02/25)*25;
+  const e0=futureDate(0), e7=futureDate(7), e14=futureDate(14), eJun=junExpiry();
+  if      (name==='straddle')     { addPosition({isCall:true, isLong:true, strike:atm, expiry:e0}); addPosition({isCall:false, isLong:true, strike:atm, expiry:e0}); }
+  else if (name==='strangle')     { addPosition({isCall:true, isLong:true, strike:otmC, expiry:e0}); addPosition({isCall:false, isLong:true, strike:otmP, expiry:e0}); }
+  else if (name==='bull_spread')  { addPosition({isCall:true, isLong:true, strike:atm, expiry:e7}); addPosition({isCall:true, isLong:false, strike:otmC, expiry:e7}); }
+  else if (name==='iron_condor')  {
+    addPosition({isCall:false, isLong:false, strike:atm-25, expiry:e7});
+    addPosition({isCall:false, isLong:true,  strike:wingP,  expiry:e7});
+    addPosition({isCall:true,  isLong:false, strike:atm+25, expiry:e7});
+    addPosition({isCall:true,  isLong:true,  strike:wingC,  expiry:e7});
+  }
+  else if (name==='covered_call') { addPosition({isCall:true, isLong:false, strike:otmC, expiry:e14}); }
+  else if (name==='naked_put')    { addPosition({isCall:false, isLong:false, strike:otmP, expiry:eJun}); }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// Chart
+// ═══════════════════════════════════════════════════════════════════════════════
+const CURVES = [
+  { label:'Today EOD',  days:0,  color:'#4F46E5', width:2.5, dash:[] },
+  { label:'Tomorrow',   days:1,  color:'#7C3AED', width:2,   dash:[] },
+  { label:'+3 Days',    days:3,  color:'#EC4899', width:1.8, dash:[] },
+  { label:'+1 Week',    days:7,  color:'#F97316', width:1.8, dash:[] },
+  { label:'At Expiry',  days:-1, color:'#16A34A', width:2,   dash:[6,3] },
+];
+
+function setRange(r) {
+  chartRange = r;
+  ['r05','r1','r3','r5','r10'].forEach(id => {
+    const el = $(id); if (!el) return;
+    el.classList.remove('seg-active');
+  });
+  const map = {0.005:'r05', 0.01:'r1', 0.03:'r3', 0.05:'r5', 0.10:'r10'};
+  const active = $(map[r]);
+  if (active) active.classList.add('seg-active');
+  updateChart();
+}
+
+// Inline plugin: draws zero-line and current-ES-price vertical marker on the chart
+const refLinesPlugin = {
+  id: 'refLines',
+  afterDraw(chrt) {
+    const { ctx, chartArea: { left, right, top, bottom }, scales: { x, y } } = chrt;
+    if (!x || !y) return;
+
+    // Zero P&L horizontal line
+    if (y.min <= 0 && y.max >= 0) {
+      const yZero = y.getPixelForValue(0);
+      ctx.save();
+      ctx.setLineDash([5, 4]);
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = 'rgba(0,0,0,0.22)';
+      ctx.beginPath(); ctx.moveTo(left, yZero); ctx.lineTo(right, yZero); ctx.stroke();
+      ctx.restore();
+    }
+
+    // Current ES price vertical line
+    const F = esP();
+    if (F >= x.min && F <= x.max) {
+      const xCur = x.getPixelForValue(F);
+      ctx.save();
+      ctx.setLineDash([4, 4]);
+      ctx.lineWidth = 1.5;
+      ctx.strokeStyle = 'rgba(79,70,229,0.35)';
+      ctx.beginPath(); ctx.moveTo(xCur, top); ctx.lineTo(xCur, bottom); ctx.stroke();
+      // Label
+      ctx.setLineDash([]);
+      ctx.font = "11px 'DM Sans',sans-serif";
+      ctx.fillStyle = 'rgba(79,70,229,0.7)';
+      ctx.textAlign = 'center';
+      ctx.fillText('Current', xCur, top - 4);
+      ctx.restore();
+    }
+  }
+};
+
+function initChart() {
+  if (chart) { chart.destroy(); chart=null; }
+  const ctx = $('payoffChart').getContext('2d');
+  chart = new Chart(ctx, {
+    type: 'line',
+    data: { datasets:[] },
+    plugins: [refLinesPlugin],
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: { duration:120 },
+      interaction: { mode:'index', intersect:false },
+      plugins: {
+        legend: {
+          position:'top',
+          labels: {
+            font:{ family:"'DM Sans',sans-serif", size:12 },
+            color:'#52525B', boxWidth:28, padding:16
+          }
+        },
+        tooltip: {
+          callbacks: {
+            title: ctx => `ES: ${Number(ctx[0].parsed.x).toLocaleString()}`,
+            label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y>=0?'+':''}\$${ctx.parsed.y.toFixed(0)}`
+          },
+          titleFont:{ family:"'DM Sans',sans-serif", size:12 },
+          bodyFont: { family:"'DM Sans',sans-serif", size:12 },
+          backgroundColor:'#18181B', titleColor:'#fff', bodyColor:'#D4D4D8',
+          padding:10, cornerRadius:8, boxPadding:4
+        }
+      },
+      scales: {
+        x: {
+          type:'linear',
+          title:{ display:true, text:'ES Futures Price', color:'#A1A1AA', font:{family:"'DM Sans',sans-serif",size:11} },
+          ticks:{ color:'#71717A', font:{family:"'DM Sans',sans-serif",size:11}, maxTicksLimit:10,
+                  callback: v => v.toLocaleString() },
+          grid:{ color:'rgba(0,0,0,0.04)' }
+        },
+        y: {
+          title:{ display:true, text:'P&L (USD)', color:'#A1A1AA', font:{family:"'DM Sans',sans-serif",size:11} },
+          ticks:{ color:'#71717A', font:{family:"'DM Sans',sans-serif",size:11},
+                  callback: v => (v>=0?'':'-')+'$'+Math.abs(v).toLocaleString() },
+          grid:{ color:'rgba(0,0,0,0.04)' }
+        }
+      }
+    }
+  });
+}
+
+function updateChart() {
+  const hasPos = positions.length > 0;
+  $('payoffChart').style.display  = hasPos ? '' : 'none';
+  $('chartEmpty').style.display   = hasPos ? 'none' : '';
+
+  if (!hasPos) { if(chart) { chart.data.datasets=[]; chart.update('none'); } return; }
+  if (!chart) initChart();
+
+  const F   = esP();
+  const lo  = F*(1-chartRange);
+  const hi  = F*(1+chartRange);
+  const N   = 240;
+  const xs  = Array.from({length:N}, (_,i) => lo + i*(hi-lo)/(N-1));
+
+  const maxExp = Math.max(...positions.map(p => daysUntil(p.expiry)));
+
+  const datasets = [];
+
+  // Payoff curves per time horizon
+  const shownDays = new Set();
+  CURVES.forEach(c => {
+    const days = c.days===-1 ? maxExp : c.days;
+    // Skip if all positions have expired by this point (except Today EOD)
+    if (c.days > 0 && days > maxExp) return;
+    // Skip "At Expiry" if an explicit curve already covers that day (avoid exact overlay)
+    if (c.days===-1 && (maxExp===0 || shownDays.has(maxExp))) return;
+    shownDays.add(days);
+
+    datasets.push({
+      label: c.label,
+      data: xs.map(x => ({x, y: portPayoff(x, days)})),
+      borderColor: c.color,
+      borderWidth: c.width,
+      borderDash: c.dash,
+      pointRadius: 0,
+      fill: false,
+      tension: 0.15
+    });
+  });
+
+  chart.data.datasets = datasets;
+  chart.update('none');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// Greeks display
+// ═══════════════════════════════════════════════════════════════════════════════
+function updateGreeks() {
+  const g   = portGreeks();
+  const pnl = portPayoff(esP(), 0);
+
+  function setVal(id, val, text, isPos) {
+    const el = $(id); if (!el) return;
+    el.textContent = text;
+    el.className = 'greek-val' + (isPos === true ? ' pos' : isPos === false ? ' neg' : '');
+  }
+  function setSub(id, text) { const el=$(id); if(el) el.textContent=text; }
+
+  setVal('gDelta', g.delta, (g.delta>=0?'+':'')+g.delta.toFixed(3), g.delta>0 ? true : g.delta<0 ? false : null);
+  setVal('gGamma', g.gamma, (g.gamma>=0?'+':'')+g.gamma.toFixed(5), null);
+
+  // Theta: negative = losing time value (bad for long, good for short)
+  const thetaPts = g.theta / 50;  // back to points/day (portfolio-wide, not per contract)
+  setVal('gTheta', g.theta, (g.theta>=0?'+$':'-$')+Math.abs(g.theta).toFixed(0), g.theta>0 ? true : g.theta<0 ? false : null);
+  setSub('gThetaPts', (thetaPts>=0?'+':'')+thetaPts.toFixed(2)+' pts/day');
+
+  // Vega: positive = benefits from IV rise
+  const vegaPts = g.vega / 50;
+  setVal('gVega', g.vega, (g.vega>=0?'+$':'-$')+Math.abs(g.vega).toFixed(0), g.vega>0 ? true : g.vega<0 ? false : null);
+  setSub('gVegaPts', (vegaPts>=0?'+':'')+vegaPts.toFixed(2)+' pts/+1%IV');
+
+  // Net premium: positive netPrem = net debit paid; negative = net credit received
+  // Show as debit (red) or credit (green) — opposite of the sign convention in portGreeks
+  const isDebit = g.netPrem > 0;
+  const isCredit= g.netPrem < 0;
+  setVal('gNetPrem', g.netPrem,
+    isDebit  ? 'Debit  $'+g.netPrem.toFixed(0) :
+    isCredit ? 'Credit $'+Math.abs(g.netPrem).toFixed(0) : '$0',
+    isCredit ? true : isDebit ? false : null);  // credit=green, debit=red
+
+  // Current P&L at current ES price
+  setVal('gCurPnl', pnl, (pnl>=0?'+$':'-$')+Math.abs(pnl).toFixed(0), pnl>0 ? true : pnl<0 ? false : null);
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// Persistence — save/restore via localStorage
+// ═══════════════════════════════════════════════════════════════════════════════
+const LS_KEY = 'es_options_positions_v1';
+const LS_PARAMS_KEY = 'es_options_params_v1';
+
+function saveToStorage() {
+  try {
+    localStorage.setItem(LS_KEY, JSON.stringify(positions));
+    localStorage.setItem(LS_PARAMS_KEY, JSON.stringify({
+      esPrice: $('esPrice').value,
+      vix:     $('vix').value,
+      rfr:     $('rfr').value
+    }));
+  } catch(e) {}
+}
+
+function loadFromStorage() {
+  try {
+    const params = JSON.parse(localStorage.getItem(LS_PARAMS_KEY) || 'null');
+    if (params) {
+      if (params.esPrice) $('esPrice').value = params.esPrice;
+      if (params.vix)     $('vix').value     = params.vix;
+      if (params.rfr)     $('rfr').value     = params.rfr;
+    }
+    const saved = JSON.parse(localStorage.getItem(LS_KEY) || 'null');
+    if (saved && Array.isArray(saved) && saved.length > 0) {
+      saved.forEach(pos => {
+        // Assign a fresh id so no collisions
+        pos.id = nextId++;
+        positions.push(pos);
+        renderRow(pos);
+      });
+      return true;
+    }
+  } catch(e) {}
+  return false;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// Main update (debounced)
+// ═══════════════════════════════════════════════════════════════════════════════
+function scheduleUpdate() {
+  clearTimeout(updateTimer);
+  updateTimer = setTimeout(update, 60);
+}
+
+function update() {
+  const has = positions.length > 0;
+  $('emptyState').style.display  = has ? 'none' : '';
+  $('tableWrap').style.display   = has ? ''     : 'none';
+  $('greeksPanel').style.display = has ? ''     : 'none';
+  $('posCount').textContent      = has ? `(${positions.length})` : '';
+
+  if (has) {
+    positions.forEach(p => refreshPosValue(p));
+    updateGreeks();
+  }
+  updateChart();
+  saveToStorage();
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// Init
+// ═══════════════════════════════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  const today = new Date(); today.setHours(0,0,0,0);
+  $('analysisDate').value = today.toISOString().split('T')[0];
+  initChart();
+  loadFromStorage();
+  update();
+  setRange(chartRange); // highlight default range button
+});
+</script>
