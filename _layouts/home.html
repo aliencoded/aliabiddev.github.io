@@ -9,7 +9,8 @@ layout: default
       <div class="hero-content">
         <p class="hero-eyebrow reveal">Principal Technologist &middot; Architecture, Platforms &amp; Identity</p>
         <h1 class="hero-title reveal">{{ site.author }}</h1>
-        <p class="hero-sub reveal">13 years building and leading enterprise software at Fortune 100 financial firms &mdash; architecture, platforms, identity, and product engineering. Currently Principal at Capital One; independently shipping mobile, AI, and fintech products.</p>
+        <p class="hero-sub reveal">13 years building and leading enterprise software at Fortune 100 financial firms &mdash; architecture, platforms, identity, and product engineering.</p>
+        <p class="hero-now reveal"><span class="hero-now-label">Now</span> Leading IAM at Capital One. Shipping Wizard Route (iOS) and Carpool1 (Flutter) independently.</p>
         <div class="hero-actions reveal">
           <a href="{{ "/work" | relative_url }}" class="btn btn-primary">View Work</a>
           <a href="{{ "/skills" | relative_url }}" class="btn btn-outline">Skill Tree &rarr;</a>
@@ -278,82 +279,55 @@ layout: default
   </div>
 </section>
 
-<!-- Selected Engagements (anonymized, NDA-respecting) -->
+<!-- Career timeline (compact strip; full engagement detail on /work) -->
 <section class="section engagements-section" id="engagements">
   <div class="container">
-    <h2 class="section-title reveal">Selected Engagements</h2>
-    <p class="section-lede reveal">Recent and ongoing technology-leadership work at Fortune 100 financial-services firms &mdash; spanning architecture, platforms, identity, and program delivery.</p>
-    <div class="cards-grid cards-grid-engagements">
-
-      <!-- Capital One -->
-      <div class="card card-engagement reveal">
-        <span class="card-badge badge-live">Current</span>
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm-1 16l-5-5 1.41-1.41L11 15.17l7.59-7.59L20 9l-9 9z"/></svg>
-        </div>
-        <p class="card-label">Sep 2024 &ndash; Present</p>
-        <h3 class="card-title">Capital One</h3>
-        <p class="card-meta">Principal Cybersecurity Engineer</p>
-        <p class="card-desc">Leading IAM initiatives at Fortune 100 scale &mdash; <strong>30K+ users, 50K+ accounts</strong>. Delivered Okta&ndash;SailPoint IIQ integration covering JML, certifications, and access workflows. Built ServiceNow CMDB and Active Directory APIs. Improved SDLC, QA automation, and release processes.</p>
-        <div class="card-actions">
-          <a href="{{ "/work/capital-one" | relative_url }}" class="card-link">Engagement details &rarr;</a>
-        </div>
-      </div>
-
-      <!-- Vanguard IAM Tech Lead -->
-      <div class="card card-engagement reveal">
-        <span class="card-badge badge-live">2022&ndash;2024</span>
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
-        </div>
-        <p class="card-label">Mar 2022 &ndash; Aug 2024</p>
-        <h3 class="card-title">The Vanguard Group</h3>
-        <p class="card-meta">Application Engineering Tech Lead, IAM</p>
-        <p class="card-desc">Led <strong>SailPoint IIQ development</strong> for the enterprise IAM program. Designed SOX-aligned certification campaigns. Built SaaS-identity integrations (Google Workspace) and automated access workflows. Contributed to the firm&rsquo;s SailPoint ISC migration; primary technical interface to executive sponsors.</p>
-        <div class="card-actions">
-          <a href="{{ "/work/vanguard-iam" | relative_url }}" class="card-link">Engagement details &rarr;</a>
-        </div>
-      </div>
-
-      <!-- Vanguard Senior Full Stack -->
-      <div class="card card-engagement reveal">
-        <span class="card-badge badge-live">2016&ndash;2022</span>
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
-        </div>
-        <p class="card-label">Dec 2016 &ndash; Feb 2022</p>
-        <h3 class="card-title">The Vanguard Group</h3>
-        <p class="card-meta">Senior Full Stack Developer</p>
-        <p class="card-desc">Built and maintained enterprise financial platforms in Angular, Spring Boot, and PostgreSQL. Designed high-throughput batch processing with Spring Batch and IBM MQ for fund pricing, distributions, and payment workflows. Led architecture-modernization efforts across framework upgrades and system redesigns.</p>
-        <div class="card-actions">
-          <a href="{{ "/work/vanguard-eng" | relative_url }}" class="card-link">Engagement details &rarr;</a>
-        </div>
-      </div>
-
-      <!-- JPMorgan -->
-      <div class="card card-engagement reveal">
-        <span class="card-badge badge-live">2013&ndash;2016</span>
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
-        </div>
-        <p class="card-label">Aug 2013 &ndash; Nov 2016</p>
-        <h3 class="card-title">JPMorgan Chase &amp; Co.</h3>
-        <p class="card-meta">Applications Developer, Payments</p>
-        <p class="card-desc">Java middleware for credit card application processing in a regulated, high-availability environment. Drove an <strong>80%+ reduction in recurring production incidents</strong>. Built monitoring dashboards for distributed systems; mentored junior engineers; supported 24/7 production operations.</p>
-        <div class="card-actions">
-          <a href="{{ "/work/jpmorgan" | relative_url }}" class="card-link">Engagement details &rarr;</a>
-        </div>
-      </div>
-
+    <div class="section-header reveal">
+      <h2 class="section-title">Career Timeline</h2>
+      <a href="{{ "/work" | relative_url }}" class="view-all">Full work history &rarr;</a>
     </div>
+    <p class="section-lede reveal">13 years across Fortune 100 financial-services firms. Each role links to a dedicated engagement page.</p>
+
+    <div class="career-timeline reveal">
+      <div class="timeline-track"></div>
+
+      <a href="{{ "/work/capital-one" | relative_url }}" class="timeline-marker timeline-current">
+        <span class="timeline-dot"></span>
+        <span class="timeline-date">2024 &mdash; Present</span>
+        <span class="timeline-company">Capital One</span>
+        <span class="timeline-role">Principal Cybersecurity Engineer</span>
+      </a>
+
+      <a href="{{ "/work/vanguard-iam" | relative_url }}" class="timeline-marker">
+        <span class="timeline-dot"></span>
+        <span class="timeline-date">2022 &mdash; 2024</span>
+        <span class="timeline-company">The Vanguard Group</span>
+        <span class="timeline-role">Tech Lead, IAM</span>
+      </a>
+
+      <a href="{{ "/work/vanguard-eng" | relative_url }}" class="timeline-marker">
+        <span class="timeline-dot"></span>
+        <span class="timeline-date">2016 &mdash; 2022</span>
+        <span class="timeline-company">The Vanguard Group</span>
+        <span class="timeline-role">Senior Full Stack Developer</span>
+      </a>
+
+      <a href="{{ "/work/jpmorgan" | relative_url }}" class="timeline-marker">
+        <span class="timeline-dot"></span>
+        <span class="timeline-date">2013 &mdash; 2016</span>
+        <span class="timeline-company">JPMorgan Chase &amp; Co.</span>
+        <span class="timeline-role">Applications Developer, Payments</span>
+      </a>
+    </div>
+
   </div>
 </section>
 
 <!-- Products -->
 <section class="section projects-section" id="projects">
   <div class="container">
-    <h2 class="section-title reveal">Products</h2>
-    <p class="section-lede reveal">Independently shipped &mdash; live consumer apps, professional tools, and creative software, built and launched end-to-end.</p>
+    <h2 class="section-title reveal">Products &amp; Ventures</h2>
+    <p class="section-lede reveal">Independently built and operated &mdash; live consumer apps, professional tools, creative software, and a services business I run with a network of contractors.</p>
     <div class="cards-grid">
 
       <!-- Carpool1 -->
@@ -433,6 +407,22 @@ layout: default
         <div class="card-actions">
           <a href="{{ "/aoe2-stats" | relative_url }}" class="card-link">Project details &rarr;</a>
           <span class="card-link-secondary" style="opacity: 0.55;">Download &mdash; soon</span>
+        </div>
+      </div>
+
+      <!-- Jiminez Construction (venture, not a tech product) -->
+      <div class="card card-accent reveal">
+        <span class="card-badge badge-live">Live</span>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
+        </div>
+        <p class="card-label">Business &middot; Home Services</p>
+        <h3 class="card-title">Jiminez Construction</h3>
+        <p class="card-desc">Handyman and small-construction services business I founded and operate &mdash; coordinating jobs with a network of trusted contractors. Built and run end-to-end: brand, site, sales, scheduling, and delivery.</p>
+        <p class="card-meta">Founder &amp; Operator</p>
+        <div class="card-actions">
+          <a href="{{ "/jiminez-construction" | relative_url }}" class="card-link">Project details &rarr;</a>
+          <a href="https://jiminezconstruction.com" target="_blank" rel="noopener noreferrer" class="card-link-secondary">Visit site &nearr;</a>
         </div>
       </div>
 

@@ -13,8 +13,8 @@ I work at the intersection of deep technical credibility and program leadership:
 
 ### Selected impact
 
-- **At Capital One** &mdash; Leading IAM initiatives supporting **30K+ users and 50K+ accounts**. Delivered Okta&ndash;SailPoint IIQ integration covering JML, certifications, and access workflows; built ServiceNow CMDB and Active Directory APIs.
-- **At Vanguard (IAM Tech Lead)** &mdash; Led SailPoint IIQ development for the enterprise IAM program; designed SOX-aligned certification campaigns; built SaaS-identity integration (Google Workspace); contributed to SailPoint ISC migration. Primary technical interface between engineering, security, and business stakeholders.
+- **At Capital One** &mdash; Subject matter lead on identity governance; continuing SailPoint IIQ development, designing SOX-aligned certification campaigns, building SaaS-identity integration (Google Workspace), and contributing to the firm&rsquo;s SailPoint ISC migration.
+- **At Vanguard (IAM Tech Lead)** &mdash; Led the flagship **Okta&ndash;SailPoint IIQ integration** covering **30K+ users and 50K+ accounts**; built **ServiceNow CMDB and Active Directory APIs**; improved SDLC, QA automation, and release processes. Primary technical interface between engineering, security, and business stakeholders.
 - **At Vanguard (Senior Full Stack)** &mdash; Architecture-modernization work across financial platforms: Spring framework upgrades, batch-pipeline redesigns (Spring Batch + IBM MQ), and release-tooling improvements that increased throughput and maintainability.
 - **At JPMorgan Chase** &mdash; Drove an **80%+ reduction in recurring production incidents** on a consumer credit card platform; built internal monitoring dashboards to improve failure-detection time.
 
@@ -39,15 +39,16 @@ Java middleware for credit card application processing in a regulated, high-avai
 
 ---
 
-### Products
+### Products &amp; ventures
 
-I also build and ship products end-to-end across mobile, AI, and fintech. The [home page](/) has live links to:
+Alongside enterprise work I build and operate things independently &mdash; products, tools, and one services business. The [home page](/) has live links; here&rsquo;s the list:
 
 - **[Carpool1](/carpool1)** &mdash; community carpool platform; Flutter + Supabase, live on iOS, Android, and web
 - **[MetaCurrents](/metacurrents)** &mdash; AI-driven independent news portal
 - **[Wizard Route](/wizardroute)** &mdash; Unity iOS game, in App Store review
 - **[ES Options Payoff](/es-options)** &mdash; Black-76 futures-options modeling tool
 - **[AoE2 Stats Overlay](/aoe2-stats)** &mdash; live opponent ELO + civ history overlay (closed source, open-source release planned)
+- **[Jiminez Construction](/jiminez-construction)** &mdash; handyman &amp; small-construction services business I founded and operate with a contractor network
 - **[Full skill tree](/skills)** &mdash; interactive radial map of the tools and disciplines above
 
 ---
@@ -64,5 +65,3 @@ I also build and ship products end-to-end across mobile, AI, and fintech. The [h
 - Email: [aliabidx@gmail.com](mailto:aliabidx@gmail.com)
 - [LinkedIn &mdash; aliencoded](https://www.linkedin.com/in/aliencoded/)
 - GitHub: [aliabiddev](https://github.com/aliabiddev), [aliencoded](https://github.com/aliencoded)
-
-This site is also home to [Thinking Slightly](/posts) &mdash; my writing on software, technology, and ideas.
