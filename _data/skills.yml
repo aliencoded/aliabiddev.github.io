@@ -1,0 +1,135 @@
+name: Ali Abid
+children:
+  - name: Identity & Security
+    color: "#A39AF7"
+    children:
+      - name: IAM
+        proficiency: 3
+        children:
+          - { name: SailPoint, proficiency: 3 }
+          - { name: Okta, proficiency: 3 }
+          - { name: Auth0, proficiency: 2 }
+          - { name: ServiceNow, proficiency: 3 }
+          - { name: Active Directory, proficiency: 3 }
+      - name: Auth Protocols
+        proficiency: 3
+        children:
+          - { name: OAuth 2.0, proficiency: 3 }
+          - { name: OIDC, proficiency: 3 }
+          - { name: SAML, proficiency: 3 }
+          - { name: JWT, proficiency: 3 }
+      - { name: Zero Trust, proficiency: 2 }
+
+  - name: Leadership & Product
+    color: "#F0ABFC"
+    children:
+      - { name: Stakeholder Mgmt, proficiency: 3 }
+      - { name: Team Lead, proficiency: 3 }
+      - { name: Mentoring, proficiency: 3 }
+      - { name: Roadmap, proficiency: 3 }
+      - { name: Product, proficiency: 2 }
+      - { name: MVP Building, proficiency: 3 }
+
+  - name: Domain Expertise
+    color: "#FACC15"
+    children:
+      - name: Financial Services
+        proficiency: 3
+        children:
+          - { name: Banking, proficiency: 3 }
+          - { name: Asset Mgmt, proficiency: 3 }
+          - { name: Payments, proficiency: 3 }
+      - { name: SOX, proficiency: 3 }
+      - { name: Audit, proficiency: 3 }
+
+  - name: Architecture
+    color: "#60A5FA"
+    children:
+      - { name: System Design, proficiency: 3 }
+      - { name: Microservices, proficiency: 2 }
+      - { name: API Design, proficiency: 3 }
+      - { name: Cloud Migration, proficiency: 2 }
+      - { name: Distributed Sys, proficiency: 3 }
+      - { name: Event-Driven, proficiency: 2 }
+
+  - name: Backend
+    color: "#6EE7B7"
+    children:
+      - name: Java / Spring
+        proficiency: 3
+        children:
+          - { name: Spring Boot, proficiency: 3 }
+          - { name: Spring Batch, proficiency: 2 }
+          - { name: JAX-RS, proficiency: 2 }
+      - name: Python
+        proficiency: 2
+        children:
+          - { name: Flask, proficiency: 2 }
+      - { name: Node.js, proficiency: 2 }
+      - { name: REST / SOAP, proficiency: 3 }
+      - { name: IBM MQ, proficiency: 2 }
+
+  - name: Database
+    color: "#FBBF24"
+    children:
+      - { name: PostgreSQL, proficiency: 3 }
+      - { name: Supabase, proficiency: 2 }
+      - { name: Oracle, proficiency: 2 }
+      - { name: MongoDB, proficiency: 1 }
+
+  - name: Cloud / DevOps
+    color: "#FCA572"
+    children:
+      - name: AWS
+        proficiency: 2
+        children:
+          - { name: Lambda, proficiency: 2 }
+          - { name: EC2, proficiency: 2 }
+          - { name: ECS, proficiency: 2 }
+          - { name: IAM Console, proficiency: 2 }
+      - { name: Docker, proficiency: 2 }
+      - { name: Jenkins, proficiency: 2 }
+      - { name: Ansible, proficiency: 1 }
+      - { name: CI/CD, proficiency: 3 }
+      - name: Observability
+        proficiency: 2
+        children:
+          - { name: Datadog, proficiency: 2 }
+          - { name: Splunk, proficiency: 2 }
+
+  - name: Mobile & Game
+    color: "#F9A8D4"
+    children:
+      - { name: Flutter / Dart, proficiency: 2 }
+      - name: Swift
+        proficiency: 2
+        children:
+          - { name: SpriteKit, proficiency: 2 }
+          - { name: SwiftUI, proficiency: 2 }
+      - { name: Unity / C#, proficiency: 2 }
+      - { name: App Store Connect, proficiency: 3 }
+
+  - name: AI
+    color: "#7DD3FC"
+    children:
+      - { name: LLM Pipelines, proficiency: 2 }
+      - { name: Anthropic / OpenAI, proficiency: 2 }
+      - { name: Prompt Eng, proficiency: 2 }
+
+  - name: Frontend
+    color: "#D8B4FE"
+    children:
+      - { name: JavaScript, proficiency: 3 }
+      - { name: Angular, proficiency: 2 }
+      - { name: Vue.js, proficiency: 1 }
+      - { name: Jekyll, proficiency: 3 }
+      - { name: Liquid, proficiency: 3 }
+      - { name: HTML / SCSS, proficiency: 3 }
+
+  - name: Tooling
+    color: "#94A3B8"
+    children:
+      - { name: Git, proficiency: 3 }
+      - { name: Jira, proficiency: 3 }
+      - { name: Confluence, proficiency: 3 }
+      - { name: Markdown, proficiency: 3 }

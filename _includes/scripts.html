@@ -54,4 +54,63 @@
       }
     });
   });
+
+  // Skill web — click to highlight a skill and show its detail popover
+  (function () {
+    var web    = document.querySelector('.skill-web');
+    var detail = document.getElementById('skill-detail');
+    if (!web || !detail) return;
+
+    var titleEl = detail.querySelector('.skill-detail-title');
+    var profEl  = detail.querySelector('.skill-detail-prof');
+    var bodyEl  = detail.querySelector('.skill-detail-body');
+    var closeBtn = detail.querySelector('.skill-detail-close');
+    var active = null;
+
+    function clear() {
+      if (active) active.classList.remove('active');
+      active = null;
+      detail.classList.remove('visible');
+      detail.setAttribute('hidden', '');
+    }
+
+    function show(skill) {
+      if (active) active.classList.remove('active');
+      active = skill;
+      skill.classList.add('active');
+
+      var name = skill.getAttribute('data-skill') || '';
+      var prof = parseInt(skill.getAttribute('data-prof') || '0', 10);
+      var body = skill.getAttribute('data-detail') || '';
+
+      titleEl.textContent = name;
+      profEl.innerHTML = '';
+      for (var i = 1; i <= 3; i++) {
+        var d = document.createElement('span');
+        d.className = 'pd-dot' + (i > prof ? ' pd-dot-off' : '');
+        profEl.appendChild(d);
+      }
+      bodyEl.textContent = body;
+
+      detail.removeAttribute('hidden');
+      // next frame for transition
+      requestAnimationFrame(function () { detail.classList.add('visible'); });
+    }
+
+    web.querySelectorAll('.skill').forEach(function (skill) {
+      skill.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (active === skill) clear();
+        else show(skill);
+      });
+    });
+
+    closeBtn.addEventListener('click', clear);
+    document.addEventListener('click', function (e) {
+      if (!detail.contains(e.target) && !e.target.closest('.skill')) clear();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') clear();
+    });
+  })();
 </script>

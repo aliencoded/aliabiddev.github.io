@@ -1,0 +1,165 @@
+ALI ABID
+aliabidx@gmail.com
+(732) 439-1323
+Exton, PA 19341
+thinkingslightly.com
+
+================================================================
+PROFESSIONAL SUMMARY
+================================================================
+Senior Software Engineer / IAM Technical Lead with 12+ years of
+experience building and scaling identity governance platforms
+(SailPoint IIQ/ISC) across enterprise environments. Led IAM
+solutions supporting 30K+ users and 50K+ accounts. Combines deep
+backend expertise (Java, distributed systems) with entrepreneurial
+experience building and launching web-based products. Seeking
+consulting roles where technical credibility and client-facing
+leadership intersect.
+
+================================================================
+TECHNICAL SKILLS
+================================================================
+Languages:      Java, Python, JavaScript, SQL, Ruby, HTML, SCSS
+IAM/Security:   SailPoint IIQ/ISC, Okta, Auth0, CA Identity Manager,
+                IAM, IGA, PAM, Zero Trust
+Backend:        Spring Boot, JAX-RS, Flask, Spring Batch
+Frontend:       Angular, Vue.js, Node.js, Jekyll, Liquid
+Cloud/DevOps:   AWS (Lambda, EC2, ECS, IAM), Docker, Jenkins, Ansible
+Databases:      PostgreSQL, Oracle, MongoDB, Supabase
+Messaging/Infra:IBM MQ, REST, SOAP
+Tools:          Git, Jira, Confluence, SVN
+Mobile/Game:    Flutter, Swift, SpriteKit, Unity, C#
+AI / Data:      LLM pipelines, AI-driven content generation
+
+================================================================
+CLIENT IMPACT HIGHLIGHTS
+================================================================
+- Delivered enterprise IAM modernization for a Fortune 50 financial
+  services client covering 30K+ users and 50K+ accounts,
+  measurably reducing access risk and audit findings.
+- Led the integration of SailPoint IIQ with Okta, ServiceNow, and
+  Active Directory — enabling automated JML, certifications, and
+  governance reporting at enterprise scale.
+- Partnered with security, audit, and business stakeholders to
+  design certification campaigns aligned with SOX and internal
+  compliance frameworks.
+- Drove an 80%+ reduction in recurring production incidents on a
+  consumer credit card platform, improving operational stability
+  for a top U.S. bank.
+- Advised teams on architecture modernization, Spring framework
+  upgrades, and batch-processing redesigns that improved throughput
+  and maintainability.
+
+================================================================
+LINKS & PROJECTS
+================================================================
+LinkedIn:  https://www.linkedin.com/in/aliencoded/
+GitHub:    https://github.com/aliencoded
+           https://github.com/aliabiddev
+
+Carpool1 — Ridesharing Solution
+  https://carpool1.com/
+  Backup: https://carpool1-landing.netlify.app/, https://carpool1.netlify.app/
+  - Forum-style ridesharing app enabling direct coordination
+    between riders and drivers.
+  - Location-based ride discovery, user-generated listings, and
+    user-user messaging.
+
+MetaCurrents — AI-Powered News Platform
+  https://metacurrents.com/
+  Backup: https://aliencoded.github.io/
+  - Automated AI-driven news site generating multi-category
+    articles.
+  - Templated content pipelines for consistent formatting and SEO
+    optimization.
+
+ThinkingSlightly — Personal blog
+  https://www.thinkingslightly.com/
+  Backup: https://aliabiddev.github.io/
+  - Personal blog exploring software, technology, and ideas.
+
+================================================================
+PROFESSIONAL EXPERIENCE
+================================================================
+
+Capital One Financial Corp — Plano, TX
+Principal Associate Cybersecurity Engineer
+Sep 2024 – Present
+- Led IAM initiatives supporting 30K+ users and 50K+ accounts
+  across enterprise systems.
+- Delivered Okta–SailPoint IIQ integration (provisioning, JML,
+  certifications, workflows).
+- Built APIs and integrations (ServiceNow CMDB, AD) to improve
+  identity governance and access management.
+- Improved SDLC, QA automation, and release processes to increase
+  reliability and delivery speed.
+
+The Vanguard Group — Malvern, PA
+Application Engineering Technical Lead
+Mar 2022 – Aug 2024
+- Lead SailPoint IIQ development for enterprise identity
+  governance and access provisioning.
+- Built integrations (e.g., Google Workspace) and automated
+  workflows to reduce manual access requests.
+- Designed certification campaigns and IAM solutions to strengthen
+  compliance.
+- Contributed to ISC migration and developed reusable components
+  to accelerate delivery.
+
+The Vanguard Group — Malvern, PA
+Senior Full Stack Developer
+Dec 2019 – Feb 2022
+- Built and maintained enterprise financial platforms using
+  Angular, Spring Boot, and PostgreSQL.
+- Developed backend services and batch processing systems for fund
+  pricing, distributions, and payment workflows.
+- Designed and implemented high-throughput systems using Spring
+  Batch and IBM MQ for financial data processing.
+- Contributed to architecture modernization efforts, including
+  framework upgrades and system redesigns.
+
+The Vanguard Group — Malvern, PA
+Developer II
+Dec 2016 – Nov 2019
+- Built and maintained full-stack applications supporting fund
+  pricing, distributions, and payment workflows.
+- Developed backend services and batch processing jobs for
+  financial data pipelines.
+- Contributed to architecture modernization efforts, including
+  framework upgrades and system redesigns.
+- Improved system reliability and performance through debugging
+  and optimization.
+
+JPMorgan Chase & Co. — Wilmington, DE
+Applications Developer
+Aug 2013 – Nov 2016
+- Developed Java-based middleware services for credit card
+  application processing systems.
+- Improved system reliability, reducing recurring production
+  incidents by over 80%.
+- Built internal dashboards to monitor distributed systems and
+  improve failure detection time.
+- Supported quarterly and monthly release cycles for enterprise
+  applications.
+- Mentored junior engineers and contributed to onboarding and team
+  development.
+- Provided 24/7 production support for business-critical systems.
+
+Brunswick Bank & Trust — New Brunswick, NJ
+Networking and Computing Specialist
+Jun 2008 – Aug 2011
+- Provided IT support and infrastructure management across
+  multiple branch locations.
+- Managed networking, system troubleshooting, and end-user support
+  operations.
+
+================================================================
+EDUCATION
+================================================================
+Villanova University
+Master of Science, Computer Science
+Aug 2018 – Dec 2023
+
+Rutgers University
+Bachelor of Science, Biomedical Engineering (magna cum laude)
+Aug 2008 – May 2012

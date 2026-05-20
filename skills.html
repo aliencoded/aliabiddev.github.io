@@ -1,0 +1,313 @@
+---
+layout: default
+title: Skill Tree
+description: "Interactive radial skill tree — Ali Abid's professional and side-project skills, organized by category. Scroll to zoom, drag to pan, click any node to focus."
+permalink: /skills/
+---
+
+<style>
+.skills-page {
+  padding-top: calc(var(--nav-h) + 32px);
+  padding-bottom: 32px;
+  color: var(--ink);
+  background: var(--ink);
+  min-height: 100vh;
+}
+.skills-page-header {
+  max-width: 980px;
+  margin: 0 auto 16px;
+  padding: 0 24px;
+  color: var(--white);
+}
+.skills-page-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  margin: 0 0 8px;
+}
+.skills-page-header p {
+  color: rgba(250, 250, 249, 0.65);
+  font-size: 0.95rem;
+  max-width: 680px;
+  margin: 0;
+  line-height: 1.55;
+}
+.skills-page-hint {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 12px;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: rgba(250, 250, 249, 0.55);
+}
+.skills-page-hint kbd {
+  display: inline-block;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: rgba(250, 250, 249, 0.10);
+  border: 1px solid rgba(250, 250, 249, 0.15);
+  font-family: 'SFMono-Regular', Menlo, Consolas, monospace;
+  font-size: 0.85em;
+  margin-right: 4px;
+}
+
+.skill-tree-wrap {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - var(--nav-h) - 200px);
+  min-height: 560px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(79, 70, 229, 0.10) 0%, transparent 50%),
+    radial-gradient(circle at 70% 80%, rgba(79, 70, 229, 0.06) 0%, transparent 50%);
+}
+.skill-tree-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: grab;
+}
+.skill-tree-svg:active { cursor: grabbing; }
+
+/* Tree links */
+.skill-tree-svg .tree-link {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.22);
+  stroke-width: 1.2;
+  transition: stroke 0.3s ease, stroke-opacity 0.3s ease;
+}
+.skill-tree-svg .tree-link.dimmed {
+  stroke-opacity: 0.1;
+}
+.skill-tree-svg .tree-link.highlighted {
+  stroke: var(--accent);
+  stroke-width: 1.8;
+  stroke-opacity: 1;
+}
+
+/* Center node */
+.skill-tree-svg .node-root circle {
+  fill: url(#tree-center-grad);
+  filter: drop-shadow(0 0 22px rgba(79, 70, 229, 0.7));
+}
+.skill-tree-svg .node-root text {
+  font-family: var(--font-display);
+  fill: var(--white);
+  font-size: 18px;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+/* Category nodes (depth 1) — large pill */
+.skill-tree-svg .node-cat rect {
+  fill: rgba(24, 24, 27, 0.78);
+  stroke: currentColor;
+  stroke-width: 1.5;
+  transition: fill 0.2s ease, transform 0.2s ease;
+}
+.skill-tree-svg .node-cat text {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  fill: var(--white);
+  text-anchor: middle;
+  dominant-baseline: middle;
+  pointer-events: none;
+}
+.skill-tree-svg .node-cat:hover rect {
+  fill: rgba(40, 40, 45, 0.92);
+}
+
+/* Skill / sub-skill nodes — small pill */
+.skill-tree-svg .node-skill rect,
+.skill-tree-svg .node-sub rect {
+  fill: rgba(24, 24, 27, 0.86);
+  stroke: rgba(255, 255, 255, 0.22);
+  stroke-width: 1;
+  transition: fill 0.2s ease, stroke 0.2s ease;
+}
+.skill-tree-svg .node-skill text,
+.skill-tree-svg .node-sub text {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  fill: rgba(250, 250, 249, 0.92);
+  dominant-baseline: middle;
+  pointer-events: none;
+}
+.skill-tree-svg .node-sub rect {
+  fill: rgba(24, 24, 27, 0.65);
+}
+.skill-tree-svg .node-skill:hover rect,
+.skill-tree-svg .node-sub:hover rect {
+  fill: rgba(40, 40, 45, 0.95);
+  stroke: var(--accent);
+}
+
+/* Proficiency dots on pills */
+.skill-tree-svg .pill-dot { transition: fill 0.2s ease; }
+.skill-tree-svg .pill-dot.on  { fill: currentColor; }
+.skill-tree-svg .pill-dot.off { fill: rgba(255, 255, 255, 0.20); }
+
+/* Dimmed / focused states */
+.skill-tree-svg .node.dimmed { opacity: 0.18; }
+.skill-tree-svg .node.focused rect { stroke-width: 2.5; }
+
+/* Cursor on clickable nodes */
+.skill-tree-svg .node { cursor: pointer; }
+
+/* Controls bar */
+.skill-tree-controls {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  background: rgba(24, 24, 27, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 999px;
+  padding: 6px 8px;
+  z-index: 4;
+}
+.skill-tree-controls button {
+  background: transparent;
+  border: 0;
+  color: rgba(250, 250, 249, 0.78);
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.skill-tree-controls button:hover {
+  background: rgba(255, 255, 255, 0.10);
+  color: var(--white);
+}
+
+/* Skill detail popover */
+.skill-tree-popover {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 260px;
+  background: rgba(24, 24, 27, 0.94);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 16px 18px 18px;
+  color: var(--white);
+  z-index: 5;
+  opacity: 0;
+  transform: translateY(-6px) scale(0.96);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+.skill-tree-popover.visible {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+.skill-tree-popover-close {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  background: transparent;
+  border: 0;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+.skill-tree-popover-close:hover { color: var(--white); }
+.skill-tree-popover-cat {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0 0 6px;
+}
+.skill-tree-popover-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  margin: 0 0 8px;
+  color: var(--white);
+}
+.skill-tree-popover-prof {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+.skill-tree-popover-prof .pp-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.skill-tree-popover-prof .pp-dot.off { background: rgba(255, 255, 255, 0.18); }
+.skill-tree-popover-meta {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: rgba(250, 250, 249, 0.72);
+}
+
+@media (max-width: 700px) {
+  .skill-tree-popover {
+    top: auto;
+    bottom: 16px;
+    right: 16px;
+    left: 16px;
+    width: auto;
+  }
+  .skill-tree-controls { bottom: auto; top: 16px; }
+}
+</style>
+
+<section class="skills-page">
+  <header class="skills-page-header">
+    <h1>Skill Tree</h1>
+    <p>Interactive radial map of professional and side-project skills, branching from category nodes outward. Built with D3 + GSAP.</p>
+    <div class="skills-page-hint">
+      <span><kbd>scroll</kbd> zoom</span>
+      <span><kbd>drag</kbd> pan</span>
+      <span><kbd>click</kbd> a category to focus</span>
+      <span><kbd>esc</kbd> reset</span>
+    </div>
+  </header>
+
+  <div class="skill-tree-wrap">
+    <svg class="skill-tree-svg" id="skill-tree-svg" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="tree-center-grad" cx="35%" cy="35%">
+          <stop offset="0%"  stop-color="#7C72E9"/>
+          <stop offset="100%" stop-color="#4338CA"/>
+        </radialGradient>
+      </defs>
+    </svg>
+
+    <div class="skill-tree-controls">
+      <button id="tree-reset" type="button">Reset view</button>
+      <button id="tree-expand" type="button">Expand all</button>
+    </div>
+
+    <div class="skill-tree-popover" id="tree-popover" hidden>
+      <button class="skill-tree-popover-close" type="button" id="tree-popover-close" aria-label="Close">&times;</button>
+      <p class="skill-tree-popover-cat" id="tree-popover-cat"></p>
+      <h3 class="skill-tree-popover-title" id="tree-popover-title"></h3>
+      <div class="skill-tree-popover-prof" id="tree-popover-prof"></div>
+      <p class="skill-tree-popover-meta" id="tree-popover-meta"></p>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.SKILL_DATA = {{ site.data.skills | jsonify }};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="{{ "/assets/js/skill-tree.js" | relative_url }}"></script>

@@ -5,13 +5,264 @@ layout: default
 <!-- Hero -->
 <section class="hero">
   <div class="container">
-    <div class="hero-content">
-      <p class="hero-eyebrow reveal">Software Engineer &amp; Product Builder</p>
-      <h1 class="hero-title reveal">{{ site.author }}</h1>
-      <p class="hero-sub reveal">{{ site.tagline }}</p>
-      <div class="hero-actions reveal">
-        <a href="#projects" class="btn btn-primary">View Projects</a>
-        <a href="https://www.linkedin.com/in/{{ site.linkedin_username }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline">LinkedIn &rarr;</a>
+    <div class="hero-layout">
+      <div class="hero-content">
+        <p class="hero-eyebrow reveal">Software Engineer &amp; Product Builder</p>
+        <h1 class="hero-title reveal">{{ site.author }}</h1>
+        <p class="hero-sub reveal">{{ site.tagline }}</p>
+        <div class="hero-actions reveal">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="{{ "/skills" | relative_url }}" class="btn btn-outline">Skill Tree &rarr;</a>
+          <a href="https://www.linkedin.com/in/{{ site.linkedin_username }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline">LinkedIn &rarr;</a>
+        </div>
+      </div>
+
+      <div class="hero-graph">
+        <svg viewBox="0 0 720 640" class="skill-web" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="centerGrad" cx="35%" cy="35%">
+              <stop offset="0%"  stop-color="#7C72E9"/>
+              <stop offset="100%" stop-color="#4338CA"/>
+            </radialGradient>
+          </defs>
+
+          <!-- Wedge backgrounds -->
+          <g class="web-wedges">
+            <path class="wedge wedge-identity"   d="M 360 320 L 500 138 A 230 230 0 0 0 220 138 Z" style="--idx: 0"/>
+            <path class="wedge wedge-leadership" d="M 360 320 L 220 138 A 230 230 0 0 0 130 310 Z" style="--idx: 1"/>
+            <path class="wedge wedge-frontend"   d="M 360 320 L 130 310 A 230 230 0 0 0 166 444 Z" style="--idx: 2"/>
+            <path class="wedge wedge-ai"         d="M 360 320 L 166 444 A 230 230 0 0 0 236 514 Z" style="--idx: 3"/>
+            <path class="wedge wedge-mobile"     d="M 360 320 L 236 514 A 230 230 0 0 0 390 548 Z" style="--idx: 4"/>
+            <path class="wedge wedge-database"   d="M 360 320 L 390 548 A 230 230 0 0 0 542 460 Z" style="--idx: 5"/>
+            <path class="wedge wedge-cloud"      d="M 360 320 L 542 460 A 230 230 0 0 0 588 290 Z" style="--idx: 6"/>
+            <path class="wedge wedge-backend"    d="M 360 320 L 588 290 A 230 230 0 0 0 500 138 Z" style="--idx: 7"/>
+          </g>
+
+          <!-- Wedge boundary dividers -->
+          <g class="web-dividers">
+            <line class="wedge-divider" x1="412" y1="253" x2="506" y2="130"/>
+            <line class="wedge-divider" x1="308" y1="253" x2="214" y2="130"/>
+            <line class="wedge-divider" x1="275" y1="324" x2="120" y2="330"/>
+            <line class="wedge-divider" x1="288" y1="366" x2="158" y2="449"/>
+            <line class="wedge-divider" x1="314" y1="392" x2="231" y2="523"/>
+            <line class="wedge-divider" x1="371" y1="404" x2="391" y2="558"/>
+            <line class="wedge-divider" x1="427" y1="372" x2="550" y2="466"/>
+            <line class="wedge-divider" x1="444" y1="309" x2="598" y2="289"/>
+          </g>
+
+          <!-- Category labels -->
+          <g class="web-labels">
+            <text class="wedge-label" x="360" y="60"  text-anchor="middle">Identity &amp; Security</text>
+            <text class="wedge-label" x="129" y="200" text-anchor="middle">Leadership &amp; Product</text>
+            <text class="wedge-label" x="109" y="387" text-anchor="middle">Frontend</text>
+            <text class="wedge-label" x="176" y="504" text-anchor="middle">AI</text>
+            <text class="wedge-label" x="304" y="574" text-anchor="middle">Mobile &amp; Game</text>
+            <text class="wedge-label" x="490" y="545" text-anchor="middle">Database</text>
+            <text class="wedge-label" x="611" y="387" text-anchor="middle">Cloud / DevOps</text>
+            <text class="wedge-label" x="585" y="190" text-anchor="middle">Backend</text>
+          </g>
+
+          <!-- Lines: one spoke from center to every skill (no hub-to-skill branches — categorization is shown by wedge backgrounds) -->
+          <g class="web-lines">
+            <!-- IDENTITY -->
+            <line class="web-spoke" x1="360" y1="320" x2="360" y2="190" style="--idx: 0"/>
+            <line class="web-spoke" x1="360" y1="320" x2="305" y2="170" style="--idx: 1"/>
+            <line class="web-spoke" x1="360" y1="320" x2="415" y2="170" style="--idx: 2"/>
+            <line class="web-spoke" x1="360" y1="320" x2="472" y2="154" style="--idx: 3"/>
+            <line class="web-spoke" x1="360" y1="320" x2="248" y2="154" style="--idx: 4"/>
+            <line class="web-spoke" x1="360" y1="320" x2="341" y2="106" style="--idx: 5"/>
+            <line class="web-spoke" x1="360" y1="320" x2="379" y2="106" style="--idx: 6"/>
+            <!-- LEADERSHIP -->
+            <line class="web-spoke" x1="360" y1="320" x2="249" y2="243" style="--idx: 7"/>
+            <line class="web-spoke" x1="360" y1="320" x2="233" y2="193" style="--idx: 8"/>
+            <line class="web-spoke" x1="360" y1="320" x2="191" y2="275" style="--idx: 9"/>
+            <line class="web-spoke" x1="360" y1="320" x2="225" y2="159" style="--idx: 10"/>
+            <line class="web-spoke" x1="360" y1="320" x2="151" y2="302" style="--idx: 11"/>
+            <line class="web-spoke" x1="360" y1="320" x2="170" y2="231" style="--idx: 12"/>
+            <!-- FRONTEND -->
+            <line class="web-spoke" x1="360" y1="320" x2="215" y2="359" style="--idx: 13"/>
+            <line class="web-spoke" x1="360" y1="320" x2="156" y2="338" style="--idx: 14"/>
+            <line class="web-spoke" x1="360" y1="320" x2="174" y2="407" style="--idx: 15"/>
+            <!-- AI -->
+            <line class="web-spoke" x1="360" y1="320" x2="236" y2="444" style="--idx: 16"/>
+            <!-- MOBILE -->
+            <line class="web-spoke" x1="360" y1="320" x2="325" y2="476" style="--idx: 17"/>
+            <line class="web-spoke" x1="360" y1="320" x2="273" y2="506" style="--idx: 18"/>
+            <line class="web-spoke" x1="360" y1="320" x2="360" y2="525" style="--idx: 19"/>
+            <!-- DATABASE -->
+            <line class="web-spoke" x1="360" y1="320" x2="438" y2="454" style="--idx: 20"/>
+            <line class="web-spoke" x1="360" y1="320" x2="412" y2="513" style="--idx: 21"/>
+            <line class="web-spoke" x1="360" y1="320" x2="501" y2="461" style="--idx: 22"/>
+            <line class="web-spoke" x1="360" y1="320" x2="451" y2="515" style="--idx: 23"/>
+            <!-- CLOUD -->
+            <line class="web-spoke" x1="360" y1="320" x2="505" y2="359" style="--idx: 24"/>
+            <line class="web-spoke" x1="360" y1="320" x2="538" y2="422" style="--idx: 25"/>
+            <line class="web-spoke" x1="360" y1="320" x2="569" y2="302" style="--idx: 26"/>
+            <line class="web-spoke" x1="360" y1="320" x2="574" y2="339" style="--idx: 27"/>
+            <!-- BACKEND -->
+            <line class="web-spoke" x1="360" y1="320" x2="499" y2="240" style="--idx: 28"/>
+            <line class="web-spoke" x1="360" y1="320" x2="501" y2="179" style="--idx: 29"/>
+            <line class="web-spoke" x1="360" y1="320" x2="563" y2="266" style="--idx: 30"/>
+          </g>
+
+          <!-- Skill nodes (with 3-dot proficiency) -->
+          <g class="web-skills">
+            <!-- IDENTITY & SECURITY (7) — dots below node -->
+            <g class="skill skill-hub skill-identity" data-skill="IAM" data-prof="3" data-detail="Enterprise identity & access management strategy — IGA, PAM, Zero Trust. 10+ years." style="--idx: 0">
+              <circle cx="360" cy="190" r="6"/><text x="360" y="178" text-anchor="middle">IAM</text>
+              <g class="prof-dots" transform="translate(360 204)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-on" cx="6" cy="0"/></g>
+            </g>
+            <g class="skill skill-identity" data-skill="SailPoint" data-prof="3" data-detail="SailPoint IIQ/ISC — primary tool for the IAM program at Vanguard + Capital One." style="--idx: 1">
+              <circle cx="305" cy="170" r="4.5"/><text x="299" y="160" text-anchor="end">SailPoint</text>
+              <g class="prof-dots" transform="translate(305 184)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-on" cx="6" cy="0"/></g>
+            </g>
+            <g class="skill skill-identity" data-skill="Okta" data-prof="3" data-detail="Led Okta–SailPoint IIQ integration program at Vanguard + Capital One." style="--idx: 2">
+              <circle cx="415" cy="170" r="4.5"/><text x="421" y="160" text-anchor="start">Okta</text>
+              <g class="prof-dots" transform="translate(415 184)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-on" cx="6" cy="0"/></g>
+            </g>
+            <g class="skill skill-identity" data-skill="ServiceNow" data-prof="3" data-detail="ServiceNow CMDB integrations for identity governance and access requests." style="--idx: 3">
+              <circle cx="472" cy="154" r="4.5"/><text x="478" y="146" text-anchor="start">ServiceNow</text>
+              <g class="prof-dots" transform="translate(472 168)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-on" cx="6" cy="0"/></g>
+            </g>
+            <g class="skill skill-identity" data-skill="Auth0" data-prof="2" data-detail="Auth0 for app-level authentication and OAuth/OIDC flows." style="--idx: 4">
+              <circle cx="248" cy="154" r="4.5"/><text x="242" y="146" text-anchor="end">Auth0</text>
+              <g class="prof-dots" transform="translate(248 168)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-off" cx="6" cy="0"/></g>
+            </g>
+            <g class="skill skill-identity" data-skill="Active Directory" data-prof="3" data-detail="AD integration with SailPoint/Okta for enterprise JML and provisioning." style="--idx: 5">
+              <circle cx="341" cy="106" r="4.5"/><text x="341" y="94" text-anchor="middle">Active Directory</text>
+              <g class="prof-dots" transform="translate(341 120)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-on" cx="6" cy="0"/></g>
+            </g>
+            <g class="skill skill-identity" data-skill="Zero Trust" data-prof="2" data-detail="Zero Trust architecture — designing for identity-aware perimeter-less networks." style="--idx: 6">
+              <circle cx="379" cy="106" r="4.5"/><text x="379" y="94" text-anchor="middle">Zero Trust</text>
+              <g class="prof-dots" transform="translate(379 120)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-off" cx="6" cy="0"/></g>
+            </g>
+
+            <!-- LEADERSHIP & PRODUCT (6) -->
+            <g class="skill skill-hub skill-leadership" data-skill="Stakeholder Mgmt" data-prof="3" data-detail="Client advisory & stakeholder management across business, IT, risk, and audit." style="--idx: 7">
+              <circle cx="249" cy="243" r="6"/><text x="241" y="247" text-anchor="end">Stakeholder Mgmt</text>
+              <g class="prof-dots" transform="translate(249 257)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-on" cx="6" cy="0"/></g>
+            </g>
+            <g class="skill skill-leadership" data-skill="Team Leadership" data-prof="3" data-detail="Led IAM/engineering teams; primary technical interface to executives." style="--idx: 8">
+              <circle cx="233" cy="193" r="4.5"/><text x="227" y="185" text-anchor="end">Team Leadership</text>
+              <g class="prof-dots" transform="translate(233 207)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-on" cx="6" cy="0"/></g>
+            </g>
+            <g class="skill skill-leadership" data-skill="Mentoring" data-prof="3" data-detail="Mentored junior engineers; built onboarding and team development at JPMC + Vanguard." style="--idx: 9">
+              <circle cx="191" cy="275" r="4.5"/><text x="185" y="279" text-anchor="end">Mentoring</text>
+              <g class="prof-dots" transform="translate(191 289)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-on" cx="6" cy="0"/></g>
+            </g>
+            <g class="skill skill-leadership" data-skill="Roadmap Planning" data-prof="3" data-detail="Roadmap planning, estimation, and delivery for multi-year platform programs." style="--idx: 10">
+              <circle cx="225" cy="159" r="4.5"/><text x="219" y="151" text-anchor="end">Roadmap Planning</text>
+              <g class="prof-dots" transform="translate(225 173)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-on" cx="6" cy="0"/></g>
+            </g>
+            <g class="skill skill-leadership" data-skill="Product Strategy" data-prof="2" data-detail="Building & launching side products (Carpool1, MetaCurrents) from concept to live users." style="--idx: 11">
+              <circle cx="151" cy="302" r="4.5"/><text x="145" y="306" text-anchor="end">Product Strategy</text>
+              <g class="prof-dots" transform="translate(151 316)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-off" cx="6" cy="0"/></g>
+            </g>
+            <g class="skill skill-leadership" data-skill="MVP Building" data-prof="3" data-detail="Shipped multiple MVPs end-to-end — Carpool1 (iOS+Android+Web), MetaCurrents, AoE2 Stats." style="--idx: 12">
+              <circle cx="170" cy="231" r="4.5"/><text x="164" y="223" text-anchor="end">MVP Building</text>
+              <g class="prof-dots" transform="translate(170 245)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-on" cx="6" cy="0"/></g>
+            </g>
+
+            <!-- FRONTEND (3) -->
+            <g class="skill skill-hub skill-frontend" data-skill="JavaScript" data-prof="3" data-detail="JavaScript across vanilla, Node, and Electron — primary scripting language for side projects." style="--idx: 13">
+              <circle cx="215" cy="359" r="6"/><text x="207" y="363" text-anchor="end">JavaScript</text>
+              <g class="prof-dots" transform="translate(215 373)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-on" cx="6" cy="0"/></g>
+            </g>
+            <g class="skill skill-frontend" data-skill="Angular" data-prof="2" data-detail="Angular for enterprise financial platforms at Vanguard (fund pricing, distributions)." style="--idx: 14">
+              <circle cx="156" cy="338" r="4.5"/><text x="150" y="342" text-anchor="end">Angular</text>
+              <g class="prof-dots" transform="translate(156 352)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-off" cx="6" cy="0"/></g>
+            </g>
+            <g class="skill skill-frontend" data-skill="Jekyll" data-prof="3" data-detail="Jekyll powers this site, MetaCurrents (metacurrents.com), and other static deploys." style="--idx: 15">
+              <circle cx="174" cy="407" r="4.5"/><text x="168" y="411" text-anchor="end">Jekyll</text>
+              <g class="prof-dots" transform="translate(174 421)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-on" cx="6" cy="0"/></g>
+            </g>
+
+            <!-- AI (1) -->
+            <g class="skill skill-hub skill-ai" data-skill="AI / LLMs" data-prof="2" data-detail="LLM-driven content pipelines for MetaCurrents; building agent-style automations." style="--idx: 16">
+              <circle cx="236" cy="444" r="6"/><text x="228" y="448" text-anchor="end">AI / LLMs</text>
+              <g class="prof-dots" transform="translate(236 458)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-off" cx="6" cy="0"/></g>
+            </g>
+
+            <!-- MOBILE & GAME (3) -->
+            <g class="skill skill-hub skill-mobile" data-skill="Flutter" data-prof="2" data-detail="Flutter for Carpool1 — single codebase shipping iOS, Android, and Web." style="--idx: 17">
+              <circle cx="325" cy="476" r="6"/><text x="325" y="496" text-anchor="middle">Flutter</text>
+              <g class="prof-dots" transform="translate(325 462)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-off" cx="6" cy="0"/></g>
+            </g>
+            <g class="skill skill-mobile" data-skill="Swift" data-prof="2" data-detail="Swift + SpriteKit for native iOS (Flappy Bird clone)." style="--idx: 18">
+              <circle cx="273" cy="506" r="4.5"/><text x="273" y="524" text-anchor="middle">Swift</text>
+              <g class="prof-dots" transform="translate(273 494)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-off" cx="6" cy="0"/></g>
+            </g>
+            <g class="skill skill-mobile" data-skill="Unity / C#" data-prof="2" data-detail="Unity 6 + C# for Wizard Route iOS game (in App Store review)." style="--idx: 19">
+              <circle cx="360" cy="525" r="4.5"/><text x="360" y="543" text-anchor="middle">Unity / C#</text>
+              <g class="prof-dots" transform="translate(360 513)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-off" cx="6" cy="0"/></g>
+            </g>
+
+            <!-- DATABASE (4) -->
+            <g class="skill skill-hub skill-database" data-skill="PostgreSQL" data-prof="3" data-detail="PostgreSQL for enterprise (Vanguard) and side projects (Supabase backs Carpool1)." style="--idx: 20">
+              <circle cx="438" cy="454" r="6"/><text x="438" y="446" text-anchor="middle">PostgreSQL</text>
+              <g class="prof-dots" transform="translate(438 468)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-on" cx="6" cy="0"/></g>
+            </g>
+            <g class="skill skill-database" data-skill="Supabase" data-prof="2" data-detail="Supabase for Carpool1 — Postgres + auth + edge functions + storage." style="--idx: 21">
+              <circle cx="412" cy="513" r="4.5"/><text x="412" y="531" text-anchor="middle">Supabase</text>
+              <g class="prof-dots" transform="translate(412 501)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-off" cx="6" cy="0"/></g>
+            </g>
+            <g class="skill skill-database" data-skill="Oracle" data-prof="2" data-detail="Oracle for enterprise financial platforms at JPMC and Vanguard." style="--idx: 22">
+              <circle cx="501" cy="461" r="4.5"/><text x="507" y="465" text-anchor="start">Oracle</text>
+              <g class="prof-dots" transform="translate(501 449)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-off" cx="6" cy="0"/></g>
+            </g>
+            <g class="skill skill-database" data-skill="MongoDB" data-prof="1" data-detail="MongoDB — used on smaller projects." style="--idx: 23">
+              <circle cx="451" cy="515" r="4.5"/><text x="451" y="533" text-anchor="middle">MongoDB</text>
+              <g class="prof-dots" transform="translate(451 503)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-off" cx="0" cy="0"/><circle class="dot dot-off" cx="6" cy="0"/></g>
+            </g>
+
+            <!-- CLOUD / DEVOPS (4) -->
+            <g class="skill skill-hub skill-cloud" data-skill="AWS" data-prof="2" data-detail="AWS (Lambda, EC2, ECS, IAM) for enterprise infra and serverless integrations." style="--idx: 24">
+              <circle cx="505" cy="359" r="6"/><text x="513" y="363" text-anchor="start">AWS</text>
+              <g class="prof-dots" transform="translate(505 373)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-off" cx="6" cy="0"/></g>
+            </g>
+            <g class="skill skill-cloud" data-skill="Docker" data-prof="2" data-detail="Docker for containerization in CI/CD pipelines and local dev environments." style="--idx: 25">
+              <circle cx="538" cy="422" r="4.5"/><text x="546" y="426" text-anchor="start">Docker</text>
+              <g class="prof-dots" transform="translate(538 436)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-off" cx="6" cy="0"/></g>
+            </g>
+            <g class="skill skill-cloud" data-skill="Jenkins" data-prof="2" data-detail="Jenkins for CI orchestration on enterprise pipelines." style="--idx: 26">
+              <circle cx="569" cy="302" r="4.5"/><text x="577" y="306" text-anchor="start">Jenkins</text>
+              <g class="prof-dots" transform="translate(569 316)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-off" cx="6" cy="0"/></g>
+            </g>
+            <g class="skill skill-cloud" data-skill="CI/CD" data-prof="3" data-detail="Full pipeline delivery — SDLC + QA automation + release improvements (Capital One)." style="--idx: 27">
+              <circle cx="574" cy="339" r="4.5"/><text x="582" y="343" text-anchor="start">CI/CD</text>
+              <g class="prof-dots" transform="translate(574 353)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-on" cx="6" cy="0"/></g>
+            </g>
+
+            <!-- BACKEND (3) -->
+            <g class="skill skill-hub skill-backend" data-skill="Java / Spring" data-prof="3" data-detail="Java/Spring (Boot + Batch) for enterprise financial platforms at JPMC and Vanguard." style="--idx: 28">
+              <circle cx="499" cy="240" r="6"/><text x="509" y="244" text-anchor="start">Java / Spring</text>
+              <g class="prof-dots" transform="translate(499 254)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-on" cx="6" cy="0"/></g>
+            </g>
+            <g class="skill skill-backend" data-skill="Node.js" data-prof="2" data-detail="Node.js for AoE2 Stats Overlay (Electron) and assorted backend tooling." style="--idx: 29">
+              <circle cx="501" cy="179" r="4.5"/><text x="509" y="183" text-anchor="start">Node.js</text>
+              <g class="prof-dots" transform="translate(501 193)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-off" cx="6" cy="0"/></g>
+            </g>
+            <g class="skill skill-backend" data-skill="Python" data-prof="2" data-detail="Python for scripting, data tooling, and AI pipeline work." style="--idx: 30">
+              <circle cx="563" cy="266" r="4.5"/><text x="571" y="270" text-anchor="start">Python</text>
+              <g class="prof-dots" transform="translate(563 280)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-off" cx="6" cy="0"/></g>
+            </g>
+          </g>
+
+          <!-- Center node -->
+          <g class="web-center">
+            <circle cx="360" cy="320" r="58"/>
+            <text x="360" y="314" text-anchor="middle">Ali</text>
+            <text x="360" y="338" text-anchor="middle">Abid</text>
+          </g>
+        </svg>
+
+        <!-- Skill detail popover (populated by JS on click) -->
+        <div class="skill-detail" id="skill-detail" hidden>
+          <button class="skill-detail-close" type="button" aria-label="Close">&times;</button>
+          <h3 class="skill-detail-title"></h3>
+          <div class="skill-detail-prof"></div>
+          <p class="skill-detail-body"></p>
+        </div>
       </div>
     </div>
   </div>
@@ -31,6 +282,7 @@ layout: default
         <p class="card-label">GitHub</p>
         <h3 class="card-title">{{ site.github_username }}</h3>
         <p class="card-desc">Source code for this website and tinkering with technology</p>
+        <p class="card-meta">Updated 05/18/2026</p>
         <span class="card-link">View Profile &rarr;</span>
       </a>
 
@@ -41,42 +293,90 @@ layout: default
         </div>
         <p class="card-label">GitHub</p>
         <h3 class="card-title">{{ site.github_username2 }}</h3>
-        <p class="card-desc">Source code for metacurrents and addtional collaborative projects</p>
+        <p class="card-desc">Source code for metacurrents and additional collaborative projects</p>
+        <p class="card-meta">Updated 05/19/2026</p>
         <span class="card-link">View Profile &rarr;</span>
       </a>
 
       <!-- Carpool1 -->
-      <a href="https://carpool1.com" target="_blank" rel="noopener noreferrer" class="card card-accent reveal">
+      <div class="card card-accent reveal">
+        <span class="card-badge badge-live">Live</span>
         <div class="card-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
         </div>
-        <p class="card-label">Web App</p>
+        <p class="card-label">iOS &middot; Android &middot; Web</p>
         <h3 class="card-title">Carpool1</h3>
-        <p class="card-desc">A Community carpool platform. Closed source</p>
-        <span class="card-link">Visit App &rarr;</span>
-      </a>
+        <p class="card-desc">Community carpool platform connecting neighbors for smarter, shared commutes. Free, no fares, no middleman.</p>
+        <p class="card-meta">Updated 05/19/2026</p>
+        <div class="card-actions">
+          <a href="{{ "/carpool1" | relative_url }}" class="card-link">Project details &rarr;</a>
+          <a href="https://carpool1.com" target="_blank" rel="noopener noreferrer" class="card-link-secondary">Visit app &nearr;</a>
+        </div>
+      </div>
 
       <!-- MetaCurrents -->
-      <a href="https://metacurrents.com" target="_blank" rel="noopener noreferrer" class="card card-accent reveal">
+      <div class="card card-accent reveal">
+        <span class="card-badge badge-live">Live</span>
         <div class="card-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
         </div>
         <p class="card-label">AI Product</p>
         <h3 class="card-title">MetaCurrents</h3>
-        <p class="card-desc">AI-driven news portal</p>
-        <span class="card-link">Visit Site &rarr;</span>
-      </a>
+        <p class="card-desc">Independent news portal presenting global stories from multiple political perspectives. AI-driven aggregation and curation.</p>
+        <p class="card-meta">Updated 05/19/2026</p>
+        <div class="card-actions">
+          <a href="{{ "/metacurrents" | relative_url }}" class="card-link">Project details &rarr;</a>
+          <a href="https://metacurrents.com" target="_blank" rel="noopener noreferrer" class="card-link-secondary">Visit site &nearr;</a>
+        </div>
+      </div>
+
+      <!-- Wizard Route -->
+      <div class="card card-accent reveal">
+        <span class="card-badge badge-review">In Review</span>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7.5 5.6L10 7 8.6 4.5 10 2 7.5 3.4 5 2l1.4 2.5L5 7l2.5-1.4zM19.5 15.4L17 14l1.4 2.5L17 19l2.5-1.4L22 19l-1.4-2.5L22 14l-2.5 1.4zM22 2l-2.5 1.4L17 2l1.4 2.5L17 7l2.5-1.4L22 7l-1.4-2.5L22 2zm-7.63 5.29c-.39-.39-1.02-.39-1.41 0L1.29 18.96c-.39.39-.39 1.02 0 1.41l2.34 2.34c.39.39 1.02.39 1.41 0L16.7 11.05c.39-.39.39-1.02 0-1.41l-2.33-2.35zm-1.03 5.49l-2.12-2.12 2.44-2.44 2.12 2.12-2.44 2.44z"/></svg>
+        </div>
+        <p class="card-label">iOS Game</p>
+        <h3 class="card-title">Wizard Route</h3>
+        <p class="card-desc">A magical squad runner built in Unity &mdash; steer a coven through enchanted ruins, dodge holes, and survive the boss at the end of each route.</p>
+        <p class="card-meta">Updated 05/19/2026</p>
+        <div class="card-actions">
+          <a href="{{ "/wizardroute" | relative_url }}" class="card-link">Project details &rarr;</a>
+          <span class="card-link-secondary" style="opacity: 0.55;">App Store &mdash; soon</span>
+        </div>
+      </div>
 
       <!-- ES Options Payoff Tool -->
-      <a href="/options-payoff" class="card card-accent reveal">
+      <div class="card card-accent reveal">
+        <span class="card-badge badge-live">Live</span>
         <div class="card-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3.5 18.5L9.5 12.5L13.5 16.5L22 6.92L20.59 5.51L13.5 13.5L9.5 9.5L2 17L3.5 18.5Z"/><path d="M20 2H22V10H20V2Z"/><path d="M14 8H16V10H14V8Z"/><path d="M8 14H10V10H8V14Z"/><path d="M2 20H22V22H2V20Z"/></svg>
         </div>
         <p class="card-label">Tool</p>
         <h3 class="card-title">ES Options Payoff</h3>
-        <p class="card-desc">Real-time payoff diagram for ES mini futures options — model multi-leg positions with theta, vega, and time decay curves</p>
-        <span class="card-link">Open Tool &rarr;</span>
-      </a>
+        <p class="card-desc">Real-time payoff diagram for ES mini futures options &mdash; model multi-leg positions with theta, vega, and time decay curves.</p>
+        <p class="card-meta">Updated 04/06/2026</p>
+        <div class="card-actions">
+          <a href="{{ "/es-options" | relative_url }}" class="card-link">Project details &rarr;</a>
+          <a href="{{ "/options-payoff" | relative_url }}" class="card-link-secondary">Open tool &rarr;</a>
+        </div>
+      </div>
+
+      <!-- AoE2 Stats Overlay -->
+      <div class="card card-accent reveal">
+        <span class="card-badge badge-beta">Beta</span>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3zm-1 6h2v3h3v2h-3v3h-2v-3H8v-2h3V8z"/></svg>
+        </div>
+        <p class="card-label">Desktop Tool &middot; Open Source</p>
+        <h3 class="card-title">AoE2 Stats Overlay</h3>
+        <p class="card-desc">Live opponent ELO and civ-pick history on-screen during Age of Empires II: Definitive Edition. Electron overlay, no login, open source.</p>
+        <p class="card-meta">Updated 05/19/2026</p>
+        <div class="card-actions">
+          <a href="{{ "/aoe2-stats" | relative_url }}" class="card-link">Project details &rarr;</a>
+          <a href="https://github.com/aliencoded/aoe2-stats-mod" target="_blank" rel="noopener noreferrer" class="card-link-secondary">GitHub &nearr;</a>
+        </div>
+      </div>
 
     </div>
   </div>

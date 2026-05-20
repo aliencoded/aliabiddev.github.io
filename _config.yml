@@ -21,5 +21,9 @@ plugins:
 show_excerpts: true
 excerpt_separator: <!-- excerpt-end -->
 
+# Files kept in the repo but NOT copied into the built site
+exclude:
+  - resume.txt
+
 # Google Analytics
 google_analytics: UA-194867527-1

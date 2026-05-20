@@ -1,0 +1,188 @@
+---
+layout: default
+title: "Wizard Route"
+description: "Wizard Route — a magical squad runner for iOS, built in Unity. Lead a coven through enchanted ruins, dodge holes, and survive boss arenas."
+permalink: /wizardroute/
+---
+
+<style>
+.wr-landing {
+  padding-top: calc(var(--nav-h) + 56px);
+  padding-bottom: 80px;
+  max-width: 880px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+  color: var(--ink);
+}
+
+.wr-header {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 36px;
+}
+.wr-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #B45309;
+  background: rgba(245, 158, 11, 0.10);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+.wr-status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.wr-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.1;
+  margin: 0;
+}
+.wr-tagline {
+  font-size: 1.05rem;
+  color: var(--ink-mid);
+  margin: 0;
+  max-width: 620px;
+}
+
+.wr-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+.wr-actions .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform var(--t), box-shadow var(--t), background var(--t), color var(--t);
+}
+.wr-actions .btn-primary {
+  background: var(--ink);
+  color: var(--white);
+  &:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+}
+.wr-actions .btn-outline {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--border-strong);
+  &:hover { background: var(--accent-light); border-color: var(--accent); color: var(--accent); }
+}
+.wr-actions .btn[aria-disabled="true"] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.wr-section {
+  margin-top: 48px;
+}
+.wr-section h2 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  margin-bottom: 14px;
+}
+.wr-section p, .wr-section li {
+  color: var(--ink-mid);
+  font-size: 0.96rem;
+  line-height: 1.7;
+}
+
+.wr-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 8px;
+  padding: 0;
+  list-style: none;
+}
+.wr-features li {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 16px 18px;
+}
+.wr-features strong {
+  color: var(--ink);
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.02rem;
+  margin-bottom: 4px;
+}
+
+.wr-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  font-size: 0.95rem;
+}
+.wr-links a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--t);
+}
+.wr-links a:hover { border-color: var(--accent); }
+</style>
+
+<div class="wr-landing">
+  <header class="wr-header">
+    <span class="wr-status">In App Review &middot; May 2026</span>
+    <h1 class="wr-title">Wizard Route</h1>
+    <p class="wr-tagline">A magical squad runner for iOS. Lead a coven of wizards through enchanted ruins, dodge red holes in the floor, and survive the boss arena waiting at the end of each route.</p>
+
+    <div class="wr-actions">
+      <a class="btn btn-primary" aria-disabled="true" href="#">App Store &mdash; coming soon</a>
+      <a class="btn btn-outline" href="{{ "/wizardroute-support.html" | relative_url }}">Support</a>
+      <a class="btn btn-outline" href="{{ "/wizardroute-privacy.html" | relative_url }}">Privacy Policy</a>
+    </div>
+  </header>
+
+  <section class="wr-section">
+    <h2>What it is</h2>
+    <p>You steer a coven of wizards down a procedurally-built path through four worlds &mdash; Forest, Desert, Underground, and Volcano. Your wizards auto-fire at enemies; your job is to dodge, break through gates, free new mage classes from statues, and stay alive long enough to clear the boss waiting at the end of each route.</p>
+  </section>
+
+  <section class="wr-section">
+    <h2>Highlights</h2>
+    <ul class="wr-features">
+      <li><strong>Four mage classes</strong>Bolt, Spread, Hex, and Pyromancer &mdash; each with a different projectile pattern.</li>
+      <li><strong>Themed routes</strong>Forest, Desert, Underground, Volcano &mdash; with random night-time variants.</li>
+      <li><strong>Boss arenas</strong>Orbit around the boss while dodging slams, volleys, charges, and homing missiles.</li>
+      <li><strong>Endless mode</strong>Clear all four routes and the run keeps going with escalating difficulty.</li>
+      <li><strong>No ads, no IAP</strong>Single download. No tracking, no data collection.</li>
+      <li><strong>Practice mode</strong>Learn boss patterns without taking damage.</li>
+    </ul>
+  </section>
+
+  <section class="wr-section">
+    <h2>Status</h2>
+    <p>The first build has been uploaded to App Store Connect and is currently in Apple&rsquo;s review queue. Once approved, this page will link directly to the App Store listing.</p>
+  </section>
+
+  <section class="wr-section">
+    <h2>Resources</h2>
+    <div class="wr-links">
+      <a href="{{ "/wizardroute-support.html" | relative_url }}">Support &amp; how to play</a>
+      <a href="{{ "/wizardroute-privacy.html" | relative_url }}">Privacy policy</a>
+      <a href="mailto:aliabidx@gmail.com">Contact developer</a>
+    </div>
+  </section>
+</div>

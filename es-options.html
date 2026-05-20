@@ -1,0 +1,76 @@
+---
+layout: default
+title: "ES Options Payoff"
+description: "ES Options Payoff — a real-time, in-browser payoff and greeks tool for ES mini futures options. Black-76 pricing, multi-leg, multi-expiration."
+permalink: /es-options/
+---
+
+<div class="proj-landing">
+  <header class="proj-hero">
+    <span class="proj-status proj-status-live">Live &middot; In-Browser Tool</span>
+    <p class="proj-eyebrow">Free Derivatives Tool</p>
+    <h1 class="proj-title">ES Options Payoff</h1>
+    <p class="proj-tagline">A real-time, interactive payoff diagram for ES mini futures options &mdash; multi-leg, multi-expiration, with theta, vega, and time decay curves. Runs entirely in your browser. No login, no backend, no data leaves your machine.</p>
+
+    <div class="proj-actions">
+      <a class="btn btn-primary" href="{{ "/options-payoff" | relative_url }}">Open the tool &rarr;</a>
+    </div>
+  </header>
+
+  <section class="proj-section">
+    <h2>The need</h2>
+    <p>Most retail payoff calculators are built around equity options and use Black-Scholes. ES mini futures options need futures-style pricing (Black-76 model), where the underlying is the futures price itself rather than spot &mdash; not a small difference once you start layering in theta, vega, and term structure.</p>
+    <p>Brokerage platforms that do support futures options usually treat the analytics as a side panel: payoff at expiry, maybe one greek, one expiration at a time. Anything multi-leg or multi-expiration is awkward to lay out and clunky to iterate on. This tool is the opposite &mdash; a fast scratchpad designed for trying ten variations of the same trade in two minutes.</p>
+  </section>
+
+  <section class="proj-section">
+    <h2>What it does</h2>
+    <ul>
+      <li><strong>Multi-leg positions</strong> &mdash; add 10+ legs across calls, puts, and underlying futures, long or short.</li>
+      <li><strong>Multiple expirations in the same position</strong> &mdash; model calendar and diagonal spreads as first-class shapes.</li>
+      <li><strong>Real-time payoff curves</strong> &mdash; P&amp;L plotted against price, redrawn instantly as you change strikes, sizes, or time-to-expiry.</li>
+      <li><strong>Theta and vega curves</strong> &mdash; not just P&amp;L at one moment but how the position evolves as time passes and IV moves.</li>
+      <li><strong>Greeks rolled up</strong> &mdash; delta, gamma, theta, vega for the whole structure at any chosen price/time slice.</li>
+      <li><strong>Presets bar</strong> &mdash; common structures (vertical, straddle, strangle, iron condor, calendar) drop in instantly.</li>
+      <li><strong>Correct ES contract math</strong> &mdash; 1 point = $50 per contract, baked in. P&amp;L is shown in actual USD, not abstract points.</li>
+    </ul>
+  </section>
+
+  <section class="proj-section">
+    <h2>Tech stack</h2>
+    <ul class="proj-stack">
+      <li><strong>Vanilla JS, single HTML file</strong>No build step, no framework, no bundler. Page loads as one document and runs entirely client-side.</li>
+      <li><strong>Black-76 pricing model</strong>Futures-options pricing implemented inline in JS &mdash; the same model exchanges use to settle these contracts &mdash; rather than approximating with Black-Scholes.</li>
+      <li><strong>Chart.js 4.4</strong>Loaded from CDN. Drives the payoff and greeks plots with imperative dataset swaps, not framework reactivity.</li>
+      <li><strong>VIX-based IV defaults</strong>Current VIX is used as the base implied vol input, with per-leg overrides for skew and term-structure experiments.</li>
+      <li><strong>Jekyll-rendered shell</strong>Lives in the same site as the rest of the portfolio &mdash; uses the shared nav, design tokens, and typography from <code>_sass/styles.scss</code>.</li>
+    </ul>
+  </section>
+
+  <section class="proj-section">
+    <h2>What the design buys you</h2>
+    <ul>
+      <li><strong>No backend</strong> &mdash; nothing to deploy, nothing to maintain, no data leaves the browser. The tool will keep working as long as the static page is hosted.</li>
+      <li><strong>Snappy iteration</strong> &mdash; everything recomputes on the same tick as the input change, so dragging a strike feels live.</li>
+      <li><strong>Honest pricing</strong> &mdash; Black-76 instead of equity-options heuristics. Numbers line up with what the CME actually uses.</li>
+      <li><strong>Free forever</strong> &mdash; no auth, no paywall, no per-seat pricing. Static HTML doesn&rsquo;t have an opex line.</li>
+    </ul>
+  </section>
+
+  <section class="proj-section">
+    <h2>Status</h2>
+    <p>Live on this site as a free tool. The chart and Black-76 implementation are mature; preset library will keep growing as common ES structures get added.</p>
+  </section>
+
+  <section class="proj-section">
+    <h2>Disclaimer</h2>
+    <p>Not investment advice. Pricing uses the standard Black-76 model with the inputs you provide &mdash; results are only as good as those inputs. Trade your own capital.</p>
+  </section>
+
+  <section class="proj-section">
+    <h2>Links</h2>
+    <div class="proj-links">
+      <a href="{{ "/options-payoff" | relative_url }}">Open the tool</a>
+    </div>
+  </section>
+</div>

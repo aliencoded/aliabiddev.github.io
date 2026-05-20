@@ -1,0 +1,75 @@
+---
+layout: default
+title: "Carpool1"
+description: "Carpool1 — a free community carpool platform connecting neighbors for shared commutes. Flutter + Supabase. iOS, Android, and Web."
+permalink: /carpool1/
+---
+
+<div class="proj-landing">
+  <header class="proj-hero">
+    <span class="proj-status proj-status-live">Live &middot; iOS &middot; Android &middot; Web</span>
+    <p class="proj-eyebrow">Community Carpool Platform</p>
+    <h1 class="proj-title">Carpool1</h1>
+    <p class="proj-tagline">A free community board where drivers post routes and riders post requests. Neighbors coordinate directly &mdash; no fares, no fees, no middleman. Currently in open alpha in the Philadelphia metro area.</p>
+
+    <div class="proj-actions">
+      <a class="btn btn-primary" href="https://carpool1.com" target="_blank" rel="noopener noreferrer">Visit carpool1.com &nearr;</a>
+      <a class="btn btn-outline" href="https://app.carpool1.com" target="_blank" rel="noopener noreferrer">Open the web app</a>
+    </div>
+  </header>
+
+  <section class="proj-section">
+    <h2>The need</h2>
+    <p>Local shared rides are stuck between two bad options. Ride-hailing apps like Uber and Lyft are priced for one-off rides &mdash; not a five-day-a-week commute &mdash; and they take a meaningful cut on every trip. Community alternatives live on scattered Facebook groups, neighborhood email threads, or word of mouth, which means trust is real but coordination is painful.</p>
+    <p>Carpool1 sits in the gap: a lightweight bulletin board for a real community of neighbors. No surge pricing, no platform fee, no middleman pretending to be Uber. Just a public list of routes and requests, with built-in tools for filtering by location, time, and frequency.</p>
+  </section>
+
+  <section class="proj-section">
+    <h2>What it does</h2>
+    <ul>
+      <li><strong>Drivers post routes</strong> &mdash; origin, destination, time, recurring days, seats available.</li>
+      <li><strong>Riders post requests</strong> &mdash; the same fields from the other side.</li>
+      <li><strong>Both sides see matches</strong> filtered by geography (map + radius) and schedule overlap.</li>
+      <li><strong>Direct coordination</strong> &mdash; once two users connect, contact is exchanged through the app and the rest happens off-platform. Carpool1 stays out of the money flow.</li>
+      <li><strong>Events</strong> &mdash; one-off carpools for concerts, conferences, and games, in addition to the recurring commuter flow.</li>
+      <li><strong>Sign-up in under 30 seconds</strong> &mdash; email only, no phone number or social login required.</li>
+    </ul>
+  </section>
+
+  <section class="proj-section">
+    <h2>Tech stack</h2>
+    <ul class="proj-stack">
+      <li><strong>Flutter</strong>Single codebase shipping iOS, Android, and Web from one Dart project. Cuts maintenance versus three native apps for a small team.</li>
+      <li><strong>Supabase</strong>Postgres + auth + storage + edge functions. Row-level security policies enforce who can see and edit what without app-side guards.</li>
+      <li><strong>PostGIS</strong>Geospatial queries on routes &mdash; nearby pickups, radius search, route overlap &mdash; run inside Postgres rather than in the client.</li>
+      <li><strong>Stripe</strong>Donations only. No fares on the platform, so there&rsquo;s no money flow between rider and driver to skim.</li>
+      <li><strong>Apple Transporter / Xcode</strong>Manual iOS submission flow. App Store Connect release page targets <code>v2.41.4</code> with build numbers ratcheting on each ship.</li>
+      <li><strong>GitHub Pages</strong>The static marketing site at carpool1.com. Decoupled from the app so a landing-page tweak doesn&rsquo;t ship a new mobile build.</li>
+    </ul>
+  </section>
+
+  <section class="proj-section">
+    <h2>What the design buys you</h2>
+    <ul>
+      <li><strong>Zero fare friction</strong> &mdash; because the platform never holds money, there&rsquo;s no payments compliance, no chargebacks, no &ldquo;does the driver have a 1099?&rdquo; question, and no commission for users to resent.</li>
+      <li><strong>Cross-platform from day one</strong> &mdash; the same UI works on iPhone, Android, and a desktop browser. New users don&rsquo;t hit an &ldquo;install the app&rdquo; wall.</li>
+      <li><strong>Geographic-first matching</strong> &mdash; routes are spatial objects, not text addresses, so search returns nearby rides instead of exact-string matches.</li>
+      <li><strong>Lean infrastructure</strong> &mdash; one Supabase project covers auth, DB, file storage, and serverless functions, so a side project can sustainably stay live on a flat-rate plan.</li>
+    </ul>
+  </section>
+
+  <section class="proj-section">
+    <h2>Status</h2>
+    <p>Carpool1 is in open alpha, currently focused on the Philadelphia metro area. The iOS and Android apps are both live in their respective stores, and the web app at <code>app.carpool1.com</code> works in any modern browser.</p>
+  </section>
+
+  <section class="proj-section">
+    <h2>Links</h2>
+    <div class="proj-links">
+      <a href="https://carpool1.com" target="_blank" rel="noopener noreferrer">carpool1.com</a>
+      <a href="https://app.carpool1.com" target="_blank" rel="noopener noreferrer">app.carpool1.com</a>
+      <a href="https://carpool1.com/privacy" target="_blank" rel="noopener noreferrer">Privacy</a>
+      <a href="https://carpool1.com/terms" target="_blank" rel="noopener noreferrer">Terms</a>
+    </div>
+  </section>
+</div>

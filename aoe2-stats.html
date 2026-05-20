@@ -1,0 +1,425 @@
+---
+layout: default
+title: "AoE2 Stats Overlay"
+description: "Free open-source desktop overlay showing your opponent's rating, top civilizations, and last 5 matches in real time during Age of Empires II Definitive Edition."
+permalink: /aoe2-stats/
+---
+
+<style>
+.aoe-landing {
+  padding-top: calc(var(--nav-h) + 56px);
+  padding-bottom: 80px;
+  max-width: 880px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+  color: var(--ink);
+}
+
+.aoe-header {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 36px;
+}
+.aoe-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #1D4ED8;
+  background: rgba(59, 130, 246, 0.10);
+  border: 1px solid rgba(59, 130, 246, 0.22);
+}
+.aoe-status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.aoe-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.1;
+  margin: 0;
+}
+.aoe-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin: 0;
+}
+.aoe-tagline {
+  font-size: 1.05rem;
+  color: var(--ink-mid);
+  margin: 0;
+  max-width: 640px;
+}
+
+.aoe-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+.aoe-actions .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform var(--t), box-shadow var(--t), background var(--t), color var(--t), border-color var(--t);
+}
+.aoe-actions .btn-primary {
+  background: var(--ink);
+  color: var(--white);
+}
+.aoe-actions .btn-primary:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.aoe-actions .btn-outline {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--border-strong);
+}
+.aoe-actions .btn-outline:hover { background: var(--accent-light); border-color: var(--accent); color: var(--accent); }
+.aoe-actions .btn[aria-disabled="true"] { opacity: 0.55; cursor: not-allowed; pointer-events: none; }
+
+.aoe-section { margin-top: 48px; }
+.aoe-section h2 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  margin-bottom: 14px;
+}
+.aoe-section h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  margin-top: 20px;
+  margin-bottom: 8px;
+}
+.aoe-section p, .aoe-section li {
+  color: var(--ink-mid);
+  font-size: 0.96rem;
+  line-height: 1.7;
+}
+.aoe-section ul { padding-left: 22px; }
+
+.aoe-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 8px;
+  padding: 0;
+  list-style: none;
+}
+.aoe-features li {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 16px 18px;
+}
+.aoe-features strong {
+  color: var(--ink);
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.02rem;
+  margin-bottom: 4px;
+}
+
+.aoe-kbd {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-family: 'SFMono-Regular', Menlo, Consolas, monospace;
+  font-size: 0.82em;
+  background: rgba(127, 127, 127, 0.10);
+  border: 1px solid rgba(127, 127, 127, 0.18);
+  color: var(--ink);
+}
+
+.aoe-table-wrap {
+  overflow-x: auto;
+  margin-top: 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  background: var(--white);
+}
+.aoe-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+.aoe-table th, .aoe-table td {
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  color: var(--ink-mid);
+}
+.aoe-table th {
+  background: var(--bg);
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.aoe-table tr:last-child td { border-bottom: none; }
+.aoe-table td:not(:first-child) { text-align: center; }
+.aoe-table th:not(:first-child) { text-align: center; }
+.aoe-table .yes { color: #047857; font-weight: 600; }
+.aoe-table .no  { color: var(--ink-muted); }
+.aoe-table tr.highlight td { background: rgba(79, 70, 229, 0.04); color: var(--ink); font-weight: 500; }
+
+.aoe-faq details {
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 14px 18px;
+  margin-bottom: 10px;
+  background: var(--white);
+}
+.aoe-faq summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--ink);
+  font-size: 0.95rem;
+  list-style: none;
+}
+.aoe-faq summary::-webkit-details-marker { display: none; }
+.aoe-faq summary::after {
+  content: "+";
+  float: right;
+  color: var(--ink-muted);
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+.aoe-faq details[open] summary::after { content: "\2212"; }
+.aoe-faq details[open] summary { margin-bottom: 10px; }
+.aoe-faq p { margin: 0; }
+
+.aoe-trust {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+}
+.aoe-trust li {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--r);
+  padding: 12px 16px;
+  color: var(--ink);
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.aoe-disclaimer {
+  margin-top: 56px;
+  padding: 18px 20px;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--r);
+  background: var(--bg);
+  color: var(--ink-muted);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+</style>
+
+<div class="aoe-landing">
+  <header class="aoe-header">
+    <span class="aoe-status">Beta &middot; Windows &middot; Open Source</span>
+    <p class="aoe-eyebrow">Desktop Overlay for Age of Empires II: DE</p>
+    <h1 class="aoe-title">AoE2 Stats Overlay</h1>
+    <p class="aoe-tagline">Live opponent ELO and civ-pick history, on-screen during the match. Lightweight always-on-top Electron overlay &mdash; no login, no telemetry, all source on GitHub.</p>
+
+    <div class="aoe-actions">
+      <a class="btn btn-primary" href="https://github.com/aliencoded/aoe2-stats-mod" target="_blank" rel="noopener noreferrer">View on GitHub &rarr;</a>
+      <a class="btn btn-outline" aria-disabled="true" href="#">Download portable .exe &mdash; soon</a>
+    </div>
+  </header>
+
+  <section class="aoe-section">
+    <h2>What it shows</h2>
+    <p>Per opponent (and ally on team games):</p>
+    <ul>
+      <li>Display name + current-match civilization</li>
+      <li>1v1 RM ELO and rank, plus team RM ELO and rank</li>
+      <li>Total games played, overall winrate, current streak</li>
+      <li>Top 5 most-played civilizations (all-time)</li>
+      <li>Most-picked civs in the last 20 games, with per-civ winrate</li>
+      <li>Last 5 matches &mdash; W/L marker, civ, map, ELO delta</li>
+    </ul>
+    <p>Plus a compact summary bar for your own stats, the current map name, and a live mode that auto-switches to last-match mode when the match ends.</p>
+  </section>
+
+  <section class="aoe-section">
+    <h2>How it works</h2>
+    <p>Three steps, no install required:</p>
+    <ol>
+      <li>App reads your active Steam ID from the registry (<code>HKCU\Software\Valve\Steam\ActiveProcess</code>).</li>
+      <li>Asks <code>data.aoe2companion.com</code> what match you&rsquo;re currently in.</li>
+      <li>For each player in the match, pulls their public stats and renders a card.</li>
+    </ol>
+    <p>Data refreshes automatically every 30 seconds while you&rsquo;re in a match, cached by <code>matchId</code> so unchanged data is never re-fetched. Latency floor is ~30&ndash;90 seconds from match start to first data &mdash; bounded by aoe2companion&rsquo;s own polling cadence.</p>
+  </section>
+
+  <section class="aoe-section">
+    <h2>Highlights</h2>
+    <ul class="aoe-features">
+      <li><strong>Always-on-top</strong>Transparent overlay anchored to the top-right of the game window.</li>
+      <li><strong>Auto-collapse</strong>Game in background &rarr; pill mode. Game in foreground &rarr; full panel.</li>
+      <li><strong>Click-through toggle</strong>Pass mouse clicks straight through to the game when you don&rsquo;t need to interact with the overlay.</li>
+      <li><strong>No login</strong>SteamID resolved from the registry. No account, no OAuth, no Microsoft sign-in.</li>
+      <li><strong>No telemetry</strong>The only outbound traffic is the API calls listed in &ldquo;Data sources&rdquo;.</li>
+      <li><strong>Portable</strong>Single <code>.exe</code>, no installer, no registry changes of its own.</li>
+    </ul>
+  </section>
+
+  <section class="aoe-section">
+    <h2>Hotkeys</h2>
+    <ul>
+      <li><span class="aoe-kbd">Ctrl+Shift+S</span> &mdash; toggle pill &harr; full overlay</li>
+      <li><span class="aoe-kbd">Ctrl+Shift+R</span> &mdash; force refresh (clears cache)</li>
+      <li><span class="aoe-kbd">Ctrl+Shift+C</span> &mdash; toggle click-through</li>
+    </ul>
+    <p>Buttons in the title bar do the same thing.</p>
+  </section>
+
+  <section class="aoe-section">
+    <h2>Compared to alternatives</h2>
+    <div class="aoe-table-wrap">
+      <table class="aoe-table">
+        <thead>
+          <tr>
+            <th>Tool</th>
+            <th>Live opponent ELO</th>
+            <th>Civ history</th>
+            <th>In-game overlay</th>
+            <th>No alt-tab</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>aoe2companion mobile</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="no">phone only</td><td class="no">&mdash;</td></tr>
+          <tr><td>aoe2companion web</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="no">browser only</td><td class="no">&mdash;</td></tr>
+          <tr><td>aoe2insights.com</td><td class="no">post-game</td><td class="yes">deep</td><td class="no">&mdash;</td><td class="no">&mdash;</td></tr>
+          <tr><td>CaptureAge</td><td class="no">spectator</td><td class="no">partial</td><td class="yes">spectator client</td><td class="no">spec only</td></tr>
+          <tr><td>OBS browser-source overlays</td><td class="yes">&#10003;</td><td class="no">partial</td><td class="no">viewer only</td><td class="no">viewer only</td></tr>
+          <tr class="highlight"><td>This tool</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Honest niche: same data as aoe2companion&rsquo;s own site, but glued to the game screen with caching tuned for live play. About 80% of what their mobile app gives, none of the alt-tabbing.</p>
+  </section>
+
+  <section class="aoe-section">
+    <h2>Data sources</h2>
+    <ul>
+      <li><strong>aoe2companion API</strong> (<code>data.aoe2companion.com</code>) &mdash; current match, player ranks, recent match history. Public undocumented endpoints used by streamers and Twitch bots.</li>
+      <li><strong>aoe2insights.com</strong> &mdash; scraped via hidden Chromium for all-time top-5 civ counts. Optional &mdash; the rest of the app works without it.</li>
+      <li><strong>Steam registry</strong> &mdash; reads <code>ActiveUser</code> to derive your SteamID64.</li>
+      <li><strong>Microsoft / Xbox Live</strong> &mdash; never contacted directly. aoe2companion is the upstream.</li>
+    </ul>
+    <p>No telemetry. No phone-home. No account login. No data leaves your machine except the API calls above.</p>
+  </section>
+
+  <section class="aoe-section">
+    <h2>Why you can trust it</h2>
+    <ul class="aoe-trust">
+      <li>Open source &mdash; read every line on GitHub.</li>
+      <li>No login required.</li>
+      <li>No telemetry.</li>
+      <li>Reads only public stats.</li>
+      <li>Never touches the game process or files.</li>
+      <li>Direct links to data-source repos / sites.</li>
+    </ul>
+  </section>
+
+  <section class="aoe-section aoe-faq">
+    <h2>FAQ</h2>
+
+    <details>
+      <summary>Can I get banned for using this?</summary>
+      <p>No documented bans exist for tools of this kind. The app reads only publicly available stats (the same data anyone can see on aoe2companion.com) and never touches the game process, memory, or files. Top streamers regularly display this info on-stream.</p>
+    </details>
+
+    <details>
+      <summary>Is it a cheat?</summary>
+      <p>No. It provides no information unavailable elsewhere, doesn&rsquo;t read game state, doesn&rsquo;t automate inputs, and doesn&rsquo;t modify the client. Functionally equivalent to alt-tabbing to your phone &mdash; just integrated.</p>
+    </details>
+
+    <details>
+      <summary>Does it violate the AoE2DE EULA?</summary>
+      <p>AoE2DE has no rule against third-party companion tools. Unlike League of Legends or Valorant, there is no overlay/companion ban policy.</p>
+    </details>
+
+    <details>
+      <summary>Does it talk to Microsoft directly?</summary>
+      <p>No. It only talks to your local Steam registry and <code>data.aoe2companion.com</code>. The relic-link backend is queried indirectly through aoe2companion&rsquo;s caching layer.</p>
+    </details>
+
+    <details>
+      <summary>Anti-cheat compatibility?</summary>
+      <p>AoE2DE&rsquo;s anti-cheat targets memory tampering, DLL injection, and known cheat signatures. This tool does none of those &mdash; it&rsquo;s a separate process reading your own user data.</p>
+    </details>
+
+    <details>
+      <summary>Will it work on Game Pass / Microsoft Store version?</summary>
+      <p>Currently only the Steam version (the app relies on the Steam registry for SteamID64 resolution). Microsoft Store support is TBD.</p>
+    </details>
+
+    <details>
+      <summary>Display mode requirement?</summary>
+      <p>AoE2DE must be set to <strong>Windowed</strong> or <strong>Windowed Fullscreen</strong> (borderless). Exclusive Fullscreen hides all overlays &mdash; including Discord, OBS, Steam, and this one &mdash; due to a Windows DWM limitation that no third-party tool can fix.</p>
+    </details>
+  </section>
+
+  <section class="aoe-section">
+    <h2>Tech stack</h2>
+    <ul>
+      <li><strong>Electron 32</strong> &mdash; transparent always-on-top BrowserWindow</li>
+      <li><strong>Node 22</strong> &mdash; main process, HTTP, registry reads</li>
+      <li><strong>Cheerio</strong> &mdash; HTML parsing for the insights scrape</li>
+      <li><strong>active-win</strong> &mdash; foreground-window detection for auto-collapse</li>
+      <li><strong>Hidden offscreen Chromium</strong> &mdash; passes Cloudflare challenge for aoe2insights</li>
+      <li><strong>Vanilla HTML/CSS/JS renderer</strong> &mdash; no build step</li>
+    </ul>
+    <p>Bundle ~80 MB portable, ~150 MB installed. ~120 MB resident. ~1% CPU during refresh, idle the rest of the time.</p>
+  </section>
+
+  <section class="aoe-section">
+    <h2>Known limits</h2>
+    <ul>
+      <li><strong>No in-game hover</strong> on player names &mdash; game window captures all input. No third-party tool has solved this without DLL injection (bannable).</li>
+      <li><strong>~30&ndash;90s latency floor</strong> for new matches &mdash; bound by upstream API cadence.</li>
+      <li><strong>Exclusive fullscreen breaks all overlays</strong> &mdash; Windows limitation. Use Windowed or Windowed Fullscreen.</li>
+      <li><strong>Steam only</strong> for now &mdash; Microsoft Store uses a different account flow.</li>
+      <li><strong>No opening or build-order detection</strong> &mdash; would require replay parsing; not in scope.</li>
+    </ul>
+  </section>
+
+  <section class="aoe-section">
+    <h2>Roadmap</h2>
+    <ul>
+      <li>Head-to-head history vs current opponent</li>
+      <li>ELO trend mini-graph</li>
+      <li>Microsoft Store version support</li>
+      <li>Per-civ winrate matchup view</li>
+    </ul>
+  </section>
+
+  <div class="aoe-disclaimer">
+    Not affiliated with Microsoft, Xbox Game Studios, World&rsquo;s Edge, or Forgotten Empires. Age of Empires II: Definitive Edition is a trademark of its respective owners. Use at your own risk; the author accepts no responsibility for account actions.
+  </div>
+</div>

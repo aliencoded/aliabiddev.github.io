@@ -1,0 +1,71 @@
+---
+layout: default
+title: "MetaCurrents"
+description: "MetaCurrents — an independent news portal presenting global stories from multiple political perspectives. AI-driven aggregation and curation."
+permalink: /metacurrents/
+---
+
+<div class="proj-landing">
+  <header class="proj-hero">
+    <span class="proj-status proj-status-live">Live &middot; metacurrents.com</span>
+    <p class="proj-eyebrow">Independent News Portal</p>
+    <h1 class="proj-title">MetaCurrents</h1>
+    <p class="proj-tagline">Independent news from multiple perspectives. MetaCurrents covers geopolitics, business, technology, US politics, and more &mdash; presenting each story with context from across the political spectrum so readers can form their own views.</p>
+
+    <div class="proj-actions">
+      <a class="btn btn-primary" href="https://metacurrents.com" target="_blank" rel="noopener noreferrer">Read on metacurrents.com &nearr;</a>
+    </div>
+  </header>
+
+  <section class="proj-section">
+    <h2>The need</h2>
+    <p>Modern news consumption is shaped less by the underlying events than by which feed a reader happens to be in. The same story shows up with very different framing depending on whether it comes from a left-leaning publication, a right-leaning one, or a foreign desk. Most readers see one slice of any given story and rarely the others.</p>
+    <p>MetaCurrents flips that. The goal is to surface the same event through multiple framings side by side &mdash; not to declare any single source the truth, but to make it easy to see how the same facts get told differently and why that matters.</p>
+  </section>
+
+  <section class="proj-section">
+    <h2>What it does</h2>
+    <ul>
+      <li><strong>Multi-perspective coverage</strong> &mdash; each story is contextualized with framings from across the political spectrum.</li>
+      <li><strong>Section coverage</strong> &mdash; geopolitics, business, technology, US politics, sports, and more.</li>
+      <li><strong>AI-driven aggregation and curation</strong> &mdash; an LLM pipeline pulls source material, identifies the same story across outlets, and produces neutral synthesis with attribution.</li>
+      <li><strong>Tag pages and structured indexes</strong> &mdash; readers can navigate by topic, region, or category rather than just by chronology.</li>
+      <li><strong>SEO and feed-friendly</strong> &mdash; full RSS, sitemap, and structured data so the site plays well with search and aggregators.</li>
+    </ul>
+  </section>
+
+  <section class="proj-section">
+    <h2>Tech stack</h2>
+    <ul class="proj-stack">
+      <li><strong>Jekyll</strong>Static site generator. Each article is a markdown file under a custom <code>_articles</code> collection. Builds are deterministic and the entire site can be served from a CDN.</li>
+      <li><strong>GitHub Pages</strong>Hosting + deploy pipeline. Push to main and the site rebuilds &mdash; no separate ops layer to maintain.</li>
+      <li><strong>AI content pipeline</strong>Off-site LLM workflow generates each article, with source attribution baked into the front matter. Output lands as plain markdown commits, so the entire history is auditable.</li>
+      <li><strong>jekyll-seo-tag, jekyll-feed, jekyll-sitemap</strong>SEO meta tags, RSS feed, and XML sitemap auto-generated at build time.</li>
+      <li><strong>Custom <code>tag_pages.rb</code> plugin</strong>Generates a dedicated page for every tag in the corpus so topic-driven browsing has stable URLs.</li>
+      <li><strong>DM Serif Display + DM Sans</strong>Editorial-feeling type system &mdash; serif headlines for the &ldquo;newspaper&rdquo; voice, clean sans for body.</li>
+    </ul>
+  </section>
+
+  <section class="proj-section">
+    <h2>What the design buys you</h2>
+    <ul>
+      <li><strong>Zero infrastructure</strong> &mdash; no database, no CMS server, no auth layer. The site is just compiled markdown served as HTML.</li>
+      <li><strong>Auditable corpus</strong> &mdash; every article exists as a markdown file in git, so changes, deletions, and corrections are all visible in the commit history.</li>
+      <li><strong>Cheap to scale</strong> &mdash; GitHub Pages handles the traffic; the only variable cost is the LLM inference for new articles.</li>
+      <li><strong>Decoupled pipeline</strong> &mdash; the content-generation side can be swapped (different models, different prompting strategies) without touching the publishing layer.</li>
+    </ul>
+  </section>
+
+  <section class="proj-section">
+    <h2>Status</h2>
+    <p>MetaCurrents is live at <code>metacurrents.com</code> with active coverage. Source for the site lives on the <code>aliencoded</code> GitHub.</p>
+  </section>
+
+  <section class="proj-section">
+    <h2>Links</h2>
+    <div class="proj-links">
+      <a href="https://metacurrents.com" target="_blank" rel="noopener noreferrer">metacurrents.com</a>
+      <a href="https://github.com/aliencoded" target="_blank" rel="noopener noreferrer">GitHub &mdash; aliencoded</a>
+    </div>
+  </section>
+</div>
