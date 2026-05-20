@@ -2,22 +2,21 @@
 layout: page
 title: About
 permalink: /about/
-description: "Technology leader with 13 years of experience in enterprise identity, security, and platform engineering across Fortune 100 financial services."
+description: "Principal technologist with 13 years building and leading enterprise software at Fortune 100 financial-services firms — architecture, platforms, identity, and product engineering."
 ---
 
-Technology leader with **13 years** of experience advising and delivering enterprise-scale identity, security, and platform initiatives for **Fortune 100 financial-services clients** &mdash; banking, asset management, and payments.
+Principal technologist with **13 years** building and leading enterprise software at **Fortune 100 financial-services firms** &mdash; architecture, platforms, identity, and product engineering across banking, asset management, and payments. Currently Principal Cybersecurity Engineer at Capital One.
 
-I work at the intersection of deep technical credibility and client-facing leadership: translating ambiguous business problems into executable roadmaps, scoping and shipping multi-year programs, and acting as the technical interface between engineering, security, audit, and executive stakeholders. Currently open to **consulting engagements** where that combination matters.
+I work at the intersection of deep technical credibility and program leadership: translating ambiguous business problems into executable roadmaps, scoping and shipping multi-year programs, leading cross-functional teams, and acting as the technical interface between engineering, security, audit, and executive stakeholders. Identity & access governance is one of the areas I&rsquo;ve gone deep in &mdash; alongside platform engineering, distributed systems, batch and payments pipelines, and shipping consumer products end-to-end. Open to senior technology and leadership roles where that combination matters.
 
 ---
 
 ### Selected impact
 
-- Delivered enterprise IAM modernization for a **Fortune 50** financial-services client covering **30K+ users and 50K+ accounts**, measurably reducing access risk and audit findings.
-- Led the **Okta &ndash; SailPoint IIQ integration program** &mdash; defining the roadmap, leading implementation, and presenting progress to executive sponsors.
-- Built integrations across **SailPoint IIQ, Okta, ServiceNow, and Active Directory** &mdash; automating JML, certifications, and governance reporting at enterprise scale.
-- Partnered with security, audit, and business stakeholders to design certification campaigns aligned with **SOX** and internal compliance frameworks.
-- Drove an **80%+ reduction in recurring production incidents** on a consumer credit card platform for a top U.S. bank.
+- **At Capital One** &mdash; Leading IAM initiatives supporting **30K+ users and 50K+ accounts**. Delivered Okta&ndash;SailPoint IIQ integration covering JML, certifications, and access workflows; built ServiceNow CMDB and Active Directory APIs.
+- **At Vanguard (IAM Tech Lead)** &mdash; Led SailPoint IIQ development for the enterprise IAM program; designed SOX-aligned certification campaigns; built SaaS-identity integration (Google Workspace); contributed to SailPoint ISC migration. Primary technical interface between engineering, security, and business stakeholders.
+- **At Vanguard (Senior Full Stack)** &mdash; Architecture-modernization work across financial platforms: Spring framework upgrades, batch-pipeline redesigns (Spring Batch + IBM MQ), and release-tooling improvements that increased throughput and maintainability.
+- **At JPMorgan Chase** &mdash; Drove an **80%+ reduction in recurring production incidents** on a consumer credit card platform; built internal monitoring dashboards to improve failure-detection time.
 
 ---
 
@@ -40,9 +39,9 @@ Java middleware for credit card application processing in a regulated, high-avai
 
 ---
 
-### Side projects
+### Products
 
-I also build products end-to-end across mobile, AI, and fintech. The [home page](/) has live links to:
+I also build and ship products end-to-end across mobile, AI, and fintech. The [home page](/) has live links to:
 
 - **[Carpool1](/carpool1)** &mdash; community carpool platform; Flutter + Supabase, live on iOS, Android, and web
 - **[MetaCurrents](/metacurrents)** &mdash; AI-driven independent news portal

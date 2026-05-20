@@ -7,11 +7,11 @@ layout: default
   <div class="container">
     <div class="hero-layout">
       <div class="hero-content">
-        <p class="hero-eyebrow reveal">Software Engineer &amp; Product Builder</p>
+        <p class="hero-eyebrow reveal">Principal Technologist &middot; Architecture, Platforms &amp; Identity</p>
         <h1 class="hero-title reveal">{{ site.author }}</h1>
-        <p class="hero-sub reveal">{{ site.tagline }}</p>
+        <p class="hero-sub reveal">13 years building and leading enterprise software at Fortune 100 financial firms &mdash; architecture, platforms, identity, and product engineering. Currently Principal at Capital One; independently shipping mobile, AI, and fintech products.</p>
         <div class="hero-actions reveal">
-          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="{{ "/work" | relative_url }}" class="btn btn-primary">View Work</a>
           <a href="{{ "/skills" | relative_url }}" class="btn btn-outline">Skill Tree &rarr;</a>
           <a href="https://www.linkedin.com/in/{{ site.linkedin_username }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline">LinkedIn &rarr;</a>
         </div>
@@ -174,7 +174,7 @@ layout: default
             </g>
 
             <!-- FRONTEND (3) -->
-            <g class="skill skill-hub skill-frontend" data-skill="JavaScript" data-prof="3" data-detail="JavaScript across vanilla, Node, and Electron — primary scripting language for side projects." style="--idx: 13">
+            <g class="skill skill-hub skill-frontend" data-skill="JavaScript" data-prof="3" data-detail="JavaScript across vanilla, Node, and Electron — primary scripting language for independently-shipped products." style="--idx: 13">
               <circle cx="215" cy="359" r="6"/><text x="207" y="363" text-anchor="end">JavaScript</text>
               <g class="prof-dots" transform="translate(215 373)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-on" cx="6" cy="0"/></g>
             </g>
@@ -208,7 +208,7 @@ layout: default
             </g>
 
             <!-- DATABASE (4) -->
-            <g class="skill skill-hub skill-database" data-skill="PostgreSQL" data-prof="3" data-detail="PostgreSQL for enterprise (Vanguard) and side projects (Supabase backs Carpool1)." style="--idx: 20">
+            <g class="skill skill-hub skill-database" data-skill="PostgreSQL" data-prof="3" data-detail="PostgreSQL for enterprise (Vanguard) and independent products (Supabase backs Carpool1)." style="--idx: 20">
               <circle cx="438" cy="454" r="6"/><text x="438" y="446" text-anchor="middle">PostgreSQL</text>
               <g class="prof-dots" transform="translate(438 468)"><circle class="dot dot-on" cx="-6" cy="0"/><circle class="dot dot-on" cx="0" cy="0"/><circle class="dot dot-on" cx="6" cy="0"/></g>
             </g>
@@ -278,10 +278,82 @@ layout: default
   </div>
 </section>
 
-<!-- Projects & Profiles -->
+<!-- Selected Engagements (anonymized, NDA-respecting) -->
+<section class="section engagements-section" id="engagements">
+  <div class="container">
+    <h2 class="section-title reveal">Selected Engagements</h2>
+    <p class="section-lede reveal">Recent and ongoing technology-leadership work at Fortune 100 financial-services firms &mdash; spanning architecture, platforms, identity, and program delivery.</p>
+    <div class="cards-grid cards-grid-engagements">
+
+      <!-- Capital One -->
+      <div class="card card-engagement reveal">
+        <span class="card-badge badge-live">Current</span>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm-1 16l-5-5 1.41-1.41L11 15.17l7.59-7.59L20 9l-9 9z"/></svg>
+        </div>
+        <p class="card-label">Sep 2024 &ndash; Present</p>
+        <h3 class="card-title">Capital One</h3>
+        <p class="card-meta">Principal Cybersecurity Engineer</p>
+        <p class="card-desc">Leading IAM initiatives at Fortune 100 scale &mdash; <strong>30K+ users, 50K+ accounts</strong>. Delivered Okta&ndash;SailPoint IIQ integration covering JML, certifications, and access workflows. Built ServiceNow CMDB and Active Directory APIs. Improved SDLC, QA automation, and release processes.</p>
+        <div class="card-actions">
+          <a href="{{ "/work/capital-one" | relative_url }}" class="card-link">Engagement details &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Vanguard IAM Tech Lead -->
+      <div class="card card-engagement reveal">
+        <span class="card-badge badge-live">2022&ndash;2024</span>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+        </div>
+        <p class="card-label">Mar 2022 &ndash; Aug 2024</p>
+        <h3 class="card-title">The Vanguard Group</h3>
+        <p class="card-meta">Application Engineering Tech Lead, IAM</p>
+        <p class="card-desc">Led <strong>SailPoint IIQ development</strong> for the enterprise IAM program. Designed SOX-aligned certification campaigns. Built SaaS-identity integrations (Google Workspace) and automated access workflows. Contributed to the firm&rsquo;s SailPoint ISC migration; primary technical interface to executive sponsors.</p>
+        <div class="card-actions">
+          <a href="{{ "/work/vanguard-iam" | relative_url }}" class="card-link">Engagement details &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Vanguard Senior Full Stack -->
+      <div class="card card-engagement reveal">
+        <span class="card-badge badge-live">2016&ndash;2022</span>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+        </div>
+        <p class="card-label">Dec 2016 &ndash; Feb 2022</p>
+        <h3 class="card-title">The Vanguard Group</h3>
+        <p class="card-meta">Senior Full Stack Developer</p>
+        <p class="card-desc">Built and maintained enterprise financial platforms in Angular, Spring Boot, and PostgreSQL. Designed high-throughput batch processing with Spring Batch and IBM MQ for fund pricing, distributions, and payment workflows. Led architecture-modernization efforts across framework upgrades and system redesigns.</p>
+        <div class="card-actions">
+          <a href="{{ "/work/vanguard-eng" | relative_url }}" class="card-link">Engagement details &rarr;</a>
+        </div>
+      </div>
+
+      <!-- JPMorgan -->
+      <div class="card card-engagement reveal">
+        <span class="card-badge badge-live">2013&ndash;2016</span>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+        </div>
+        <p class="card-label">Aug 2013 &ndash; Nov 2016</p>
+        <h3 class="card-title">JPMorgan Chase &amp; Co.</h3>
+        <p class="card-meta">Applications Developer, Payments</p>
+        <p class="card-desc">Java middleware for credit card application processing in a regulated, high-availability environment. Drove an <strong>80%+ reduction in recurring production incidents</strong>. Built monitoring dashboards for distributed systems; mentored junior engineers; supported 24/7 production operations.</p>
+        <div class="card-actions">
+          <a href="{{ "/work/jpmorgan" | relative_url }}" class="card-link">Engagement details &rarr;</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Products -->
 <section class="section projects-section" id="projects">
   <div class="container">
-    <h2 class="section-title reveal">Projects &amp; Profiles</h2>
+    <h2 class="section-title reveal">Products</h2>
+    <p class="section-lede reveal">Independently shipped &mdash; live consumer apps, professional tools, and creative software, built and launched end-to-end.</p>
     <div class="cards-grid">
 
       <!-- Carpool1 -->
@@ -368,24 +440,3 @@ layout: default
   </div>
 </section>
 
-<!-- Recent Writing -->
-<section class="section writing-section" id="writing" style="background: var(--white);">
-  <div class="container">
-    <div class="section-header reveal">
-      <h2 class="section-title">Recent Writing</h2>
-      <a href="{{ "/posts" | relative_url }}" class="view-all">View all &rarr;</a>
-    </div>
-    <div class="posts-list">
-      {% for post in site.posts limit:5 %}
-      <a href="{{ post.url | prepend: site.baseurl }}" class="post-item reveal">
-        <div class="post-item-meta">{{ post.date | date: '%b %d, %Y' }}</div>
-        <div>
-          <h3 class="post-item-title">{{ post.title }}</h3>
-          <p class="post-item-excerpt">{{ post.excerpt | strip_html | truncatewords: 22 }}</p>
-        </div>
-        <span class="post-item-link">Read &rarr;</span>
-      </a>
-      {% endfor %}
-    </div>
-  </div>
-</section>

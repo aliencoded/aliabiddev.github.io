@@ -453,6 +453,45 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.2; }
   flex-wrap: wrap;
 }
 
+.hero-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(250, 250, 249, 0.10);
+  max-width: 620px;
+}
+.hero-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.hero-metric-num {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+  color: var(--white);
+  line-height: 1;
+  small {
+    font-size: 0.55em;
+    font-weight: 400;
+    color: rgba(250, 250, 249, 0.55);
+    margin-left: 1px;
+  }
+}
+.hero-metric-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: rgba(250, 250, 249, 0.55);
+  line-height: 1.3;
+}
+@media (max-width: 540px) {
+  .hero-metrics {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
 .hero-social {
   display: flex;
   flex-wrap: wrap;
@@ -530,7 +569,40 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.2; }
   font-family: var(--font-display);
   font-size: clamp(1.75rem, 3vw, 2.25rem);
   color: var(--ink);
-  margin-bottom: 48px;
+  margin-bottom: 16px;
+}
+
+.section-lede {
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: var(--ink-mid);
+  max-width: 720px;
+  margin: 0 0 36px;
+}
+
+// Engagement cards — visually distinct from side-project cards
+.engagements-section {
+  background: linear-gradient(180deg, var(--bg) 0%, var(--white) 100%);
+}
+.cards-grid-engagements {
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+.card-engagement {
+  background: var(--white);
+  border-left: 3px solid var(--accent);
+  .card-label {
+    color: var(--ink-mid);
+    letter-spacing: 0.06em;
+  }
+  .card-meta {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    color: var(--ink);
+    margin-top: 0;
+    margin-bottom: 14px;
+    font-weight: 500;
+    letter-spacing: 0;
+  }
 }
 
 .section-header {
